@@ -1,0 +1,105 @@
+<cus_page
+  bg_color="var(--themeColor)"
+  first_space_height="{{0}}"
+  title="股票.详情"
+  second_header_height="{{600}}"
+>
+  <view slot="header">
+    <view style="height: 80rpx;">
+      <top_bar 
+        high="{{80}}"
+        bind:tapIndex="tap_topIndex"
+        items="{{topItems}}"
+      ></top_bar>
+    </view>
+    <view style="background-color: white;height: 60rpx;" class="flex_center_center">
+      <text style="color: #FF9900;font-size: 25rpx;margin-right: 10rpx;">MA5:122</text>
+      <text style="color: #00CCFF;font-size: 25rpx;margin-right: 10rpx;">MA10:122</text>
+      <text style="color: #FF39EA;font-size: 25rpx;margin-right: 10rpx;">MA20:122</text>
+      <text style="color: #0A8AFA;font-size: 25rpx;margin-right: 10rpx;">MA60:122</text>
+    </view>
+    <view style="height: 60rpx;background-color: white;" class="flex_center_between">
+      <view class="flex_left_center">
+        <view style="margin-left: 60rpx;" class="flex_left_center">
+          <view style="width: 10rpx;height: 10rpx;background-color: white;border: 5rpx var(--themeColor) solid; border-radius: 50%;margin-right: 10rpx;"></view>
+          <text style="font-size: 24rpx;">买入</text>
+        </view>
+        <view style="margin-left: 20rpx;" class="flex_left_center">
+          <view style="width: 10rpx;height: 10rpx;background-color: white;border: 5rpx black solid; border-radius: 50%;margin-right: 10rpx;"></view>
+          <text style="font-size: 24rpx;">卖出</text>
+        </view>
+      </view>
+      <view> 
+        <text catchtap="tap_big" style="margin-right: 40rpx;font-size: 26rpx;color: var(--themeColor);">放大</text>
+      </view>
+    </view>
+    <view style="height: 350rpx;width: 100%;background-color: white;">
+      <kLine id="kline"></kLine>
+    </view>
+    <view style="background-color: #f5f5f5;height: 80rpx;" slot="item" class="flex_center_between padding-center">
+      <view style="width: 25%;" class="flex_center_center">
+        <text style="color: #999;font-size: 25rpx;">基金类型</text>
+      </view>
+      <view style="width: 25%;" class="flex_center_center">
+        <text style="color: #999;font-size: 25rpx;">持股家数</text>
+      </view>
+      <view style="width: 25%;" class="flex_center_center">
+        <text style="color: #999;font-size: 25rpx;">持股总数</text>
+      </view>
+      <view style="width: 25%;" class="flex_center_center">
+        <text style="color: #999;font-size: 25rpx;">持股市值</text>
+      </view>
+    </view>
+  </view>
+  
+  <block wx:for="{{list}}" wx:id="ss" wx:for-index="row">
+    <view catchtap="tap_item" data-row="{{row}}" style="background-color: white;height: 100rpx;" slot="item" class="flex_center_between padding-center">
+      <view style="width: 25%;" class="flex_center_center">
+        <text style="color: #333;font-size: 25rpx;">{{item.fundType}}</text>
+      </view>
+      <view style="width: 25%;" class="flex_center_center">
+        <text style="color: #333;font-size: 25rpx;">{{item.fundNum}}</text>
+      </view>
+      <view style="width: 25%;" class="flex_center_center">
+        <text style="color: #333;font-size: 25rpx;">{{item.shareTotal}}</text>
+      </view>
+      <view style="width: 25%;" class="flex_center_center">
+        <text style="color: #333;font-size: 25rpx;">{{item.marketValue}}</text>
+      </view>
+    </view>
+    <block wx:if="{{showSubList && currIndex == row}}" >
+      <view style="background-color: #f8f8f8;height: 100rpx;" slot="item" class="flex_center_between padding-center">
+        <view style="width: 25%;" class="flex_center_center">
+          <text style="color: #999;font-size: 25rpx;">基金名称</text>
+        </view>
+        <view style="width: 25%;" class="flex_center_center">
+          <text style="color: #999;font-size: 25rpx;">净占比</text>
+        </view>
+        <view style="width: 25%;" class="flex_center_center">
+          <text style="color: #999;font-size: 25rpx;">持股数</text>
+        </view>
+        <view style="width: 25%;" class="flex_center_center">
+          <text style="color: #999;font-size: 25rpx;">变动幅度</text>
+        </view>
+      </view>
+      <block wx:for="{{subList}}" wx:key="ss" wx:for-item="subItem">
+        <view catchtap="go_to_fund" data-item="{{subItem}}" style="background-color: #f8f8f8;height: 100rpx;" slot="item" class="flex_center_between padding-center">
+          <view style="width: 25%;" class="flex_column_left">
+            <text class="oneText" style="color: #333;font-size: 25rpx;">{{subItem.fundName}}</text>
+            <text style="color: #999;font-size: 24rpx;">{{subItem.fundCode}}</text>
+          </view>
+          <view style="width: 25%;" class="flex_center_center">
+            <text style="color: #333;font-size: 25rpx;">{{subItem.stockRatio}}</text>
+          </view>
+          <view style="width: 25%;" class="flex_center_center">
+            <text style="color: #333;font-size: 25rpx;">{{subItem.shareNum}}</text>
+          </view>
+          <view style="width: 25%;" class="flex_center_center">
+            <text style="color: {{subItem.rate > 0 ? 'red' : 'green'}};font-size: 25rpx;">{{subItem.rate}}</text>
+          </view>
+        </view>
+      </block>
+    </block>
+  </block>
+  
+</cus_page>

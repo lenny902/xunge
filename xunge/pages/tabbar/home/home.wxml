@@ -1,0 +1,289 @@
+<!--pages/tabbar/home/home.wxml-->
+<wxs module="tool" src="/utils/tool.wxs"></wxs>
+<cus_page
+  title="寻鸽"
+  id="home"
+  bg_color="var(--themeColor)"
+  is_show_back="{{false}}"
+  first_space_height="{{0}}"
+  second_header_height="{{100}}"
+>
+
+  <view slot="ss" style="background-color: rgb(0, 0, 0,0.3);margin-left:20rpx;height: 60rpx;width: calc(100vw - 380rpx);border-radius: 40rpx;" class="flex_left_center">
+    <mp-icon style="margin-left: 10rpx;" icon="search" size="20" color="white"></mp-icon>
+    <text style="font-size: 18rpx;color: white;">搜索感兴趣的股票、基金、私募等</text>
+  </view>
+
+  <view slot="header" style="height: 100rpx;">
+    <top_bar 
+      bind:tapIndex="tap_topIndex"
+      items="{{topItems}}"
+    ></top_bar>
+  </view>
+  <block wx:if="{{topIndex==1}}">
+    <block  wx:for="{{list}}" wx:key="ss">
+      <view style="background-color: white;padding-top:40rpx;" slot="item">
+        <view catchtap="go_to_fundInfo" data-item="{{item}}" style="height: 220rpx;" class="flex_column_left">
+          <view style="height: 150rpx;" class="padding-center flex_center_between">
+            <view>
+              <text style="font-size: 28rpx;color: #666;" class="oneText">{{item.fundAbbrName}}</text>
+              <text style="font-size: 28rpx;color:#999">{{item.fundCode}}</text>
+            </view>
+            <view class="flex_center_center">
+              <iconfont name="shijian" color="#999" size="12"></iconfont>
+              <text style="color:#999;font-size: 25rpx;margin-left: 5rpx;">{{item.showTime}}</text>
+            </view>
+          </view>
+          <view class="padding-center">
+            <view class="padding-center flex_center_between bottom-border" style="background-color: white;margin-top: 20rpx;padding-bottom: 40rpx;">
+              <view catchtap="tap_sub_index" data-section="{{index}}" data-index="0" class="flex_column_center" style="width: 20%;position: relative;">
+                <text style="color: #FF9900;font-size: 30rpx;">{{item.buildHoldings}}</text>
+                <text style="color:#999;font-size: 25rpx;">建仓</text>
+                <view wx:if="{{showSubs[0] && subIndex == index}}" style="position: absolute;bottom: -40rpx;left: 0;right: 0;height: 4rpx;background-color: var(--themeColor);"></view>
+              </view>
+              <view catchtap="tap_sub_index" data-section="{{index}}" data-index="1" class="flex_column_center" style="width: 20%;position: relative;">
+                <text style="color: #FF4545;font-size: 30rpx;">{{item.addHoldings}}</text>
+                <text style="color:#999;font-size: 25rpx;">加仓</text>
+                <view wx:if="{{showSubs[1] && subIndex == index}}" style="position: absolute;bottom: -40rpx;left: 0;right: 0;height: 4rpx;background-color: var(--themeColor);"></view>
+              </view>
+              <view catchtap="tap_sub_index" data-section="{{index}}" data-index="2" class="flex_column_center" style="width: 20%;position: relative;">
+                <text style="color: #15D280;font-size: 30rpx;">{{item.subHoldings}}</text>
+                <text style="color:#999;font-size: 25rpx;">减仓</text>
+                <view wx:if="{{showSubs[2] && subIndex == index}}" style="position: absolute;bottom: -40rpx;left: 0;right: 0;height: 4rpx;background-color: var(--themeColor);"></view>
+              </view>
+              <view catchtap="tap_sub_index" data-section="{{index}}" data-index="3" class="flex_column_center" style="width: 20%;position: relative;">
+                <text style="color: #333333;font-size: 30rpx;">{{item.dumpHoldings}}</text>
+                <text style="color:#999;font-size: 25rpx;">清仓</text>
+                <view wx:if="{{showSubs[3] && subIndex == index}}" style="position: absolute;bottom: -40rpx;left: 0;right: 0;height: 4rpx;background-color: var(--themeColor);"></view>
+              </view>
+              <view catchtap="tap_sub_index" data-section="{{index}}" data-index="4" class="flex_column_center" style="width: 20%;position: relative;">
+                <text style="color: #0A8AFA;font-size: 30rpx;">{{item.allHoldings}}</text>
+                <text style="color:#999;font-size: 25rpx;">持仓</text>
+                <view wx:if="{{showSubs[4] && subIndex == index}}" style="position: absolute;bottom: -40rpx;left: 0;right: 0;height: 4rpx;background-color: var(--themeColor);"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 建仓 -->
+        <block wx:if="{{isShowSub && subIndex == index && showSubs[0]}}" >
+          <view style="background-color: #F5F5F5;height: 80rpx;" class="flex_center_between padding-center">
+            <view style="width: 150rpx;" class="">
+              <text style="color: #666;font-size: 25rpx;">时间</text>
+            </view>
+            <view style="width: 150rpx;">
+              <text style="color: #666;font-size: 25rpx;">股票名称</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">建仓价</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">建仓仓位</text>
+            </view>
+          </view>
+          <view style="background-color: #f8f8f8;height: 50vh;width: 100vw;overflow-y: scroll;overflow-x: hidden;">  
+            <block wx:for="{{subList}}" wx:key="kes" wx:for-index="row" wx:for-item="subItem">
+              <view catchtap="go_to_stock" data-item="{{subItem}}" class="flex_center_between padding-center" style="height: 100rpx;">
+                <view>
+                  <text style="color: #666;font-size: 22rpx;">{{subItem.showTime}}</text>
+                </view>
+                <view class="flex_column_left" style="width: 150rpx;padding-left: 20rpx;">
+                  <text class="oneText" style="font-size: 28rpx;color: #333;">{{subItem.stockName}}</text>
+                  <text style="color: #999;font-size: 25rpx;">{{subItem.stockCode}}</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+                  <text style="color: #333;font-size: 28rpx;">{{tool.num2(subItem.cost)}}</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+                  <text style="color: #333;font-size: 28rpx;">{{tool.num2(subItem.shareNum)}}手</text>
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+        <!-- 加仓 -->
+        <block wx:if="{{isShowSub && subIndex == index && showSubs[1]}}" >
+          <view style="background-color: #F5F5F5;height: 80rpx;" class="flex_center_between padding-center">
+            <view style="width: 150rpx;" class="">
+              <text style="color: #666;font-size: 25rpx;">时间</text>
+            </view>
+            <view style="width: 150rpx;">
+              <text style="color: #666;font-size: 25rpx;">股票名称</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">加仓价</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">加仓仓位</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">变动幅度</text>
+            </view>
+          </view>
+          <view style="background-color: #f8f8f8;height: 50vh;width: 100vw;overflow-y: scroll;overflow-x: hidden;">  
+            <block wx:for="{{subList}}" wx:key="kes" wx:for-index="row" wx:for-item="subItem">
+              <view catchtap="go_to_stock" data-item="{{subItem}}" class="flex_center_between padding-center" style="height: 100rpx;">
+                <view>
+                  <text style="color: #666;font-size: 22rpx;">{{subItem.showTime}}</text>
+                </view>
+                <view class="flex_column_left" style="width: 150rpx;padding-left: 20rpx;">
+                  <text class="oneText" style="font-size: 28rpx;color: #333;">{{subItem.stockName}}</text>
+                  <text style="color: #999;font-size: 25rpx;">{{subItem.stockCode}}</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+                  <text style="color: #333;font-size: 28rpx;">{{tool.num2(subItem.cost)}}</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+                  <text style="color: #333;font-size: 28rpx;">{{tool.num2(subItem.shareNum)}}手</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+                  <text style="color: red;font-size: 28rpx;">+{{subItem.changePercent}}%</text>
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+        <!-- 减仓 -->
+        <block wx:if="{{isShowSub && subIndex == index && showSubs[2]}}" >
+          <view style="background-color: #F5F5F5;height: 80rpx;" class="flex_center_between padding-center">
+            <view style="width: 150rpx;" class="">
+              <text style="color: #666;font-size: 25rpx;">时间</text>
+            </view>
+            <view style="width: 150rpx;">
+              <text style="color: #666;font-size: 25rpx;">股票名称</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">减仓价</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">减仓仓位</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">变动幅度</text>
+            </view>
+          </view>
+          <view style="background-color: #f8f8f8;height: 50vh;width: 100vw;overflow-y: scroll;overflow-x: hidden;">  
+            <block wx:for="{{subList}}" wx:key="kes" wx:for-index="row" wx:for-item="subItem">
+              <view catchtap="go_to_stock" data-item="{{subItem}}" class="flex_center_between padding-center" style="height: 100rpx;">
+                <view>
+                  <text style="color: #666;font-size: 22rpx;">{{subItem.showTime}}</text>
+                </view>
+                <view class="flex_column_left" style="width: 150rpx;padding-left: 20rpx;">
+                  <text class="oneText" style="font-size: 28rpx;color: #333;">{{subItem.stockName}}</text>
+                  <text style="color: #999;font-size: 25rpx;">{{subItem.stockCode}}</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+                  <text style="color: #333;font-size: 28rpx;">{{tool.num2(subItem.cost)}}</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+                  <text style="color: #333;font-size: 28rpx;">{{tool.num2(subItem.shareNum)}}手</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 3);" class="flex_center_center">
+                  <text style="color: green;font-size: 28rpx;">{{subItem.changePercent}}%</text>
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+
+        <!-- 清仓 -->
+        <block wx:if="{{isShowSub && subIndex == index && showSubs[3]}}" >
+          <view style="background-color: #F5F5F5;height: 80rpx;" class="flex_center_between padding-center">
+            <view style="width: 150rpx;" class="">
+              <text style="color: #666;font-size: 25rpx;">时间</text>
+            </view>
+            <view style="width: 150rpx;">
+              <text style="color: #666;font-size: 25rpx;">股票名称</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">清仓价</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">清仓仓位</text>
+            </view>
+          </view>
+          <view style="background-color: #f8f8f8;height: 50vh;width: 100vw;overflow-y: scroll;overflow-x: hidden;">  
+            <block wx:for="{{subList}}" wx:key="kes" wx:for-index="row" wx:for-item="subItem">
+              <view catchtap="go_to_stock" data-item="{{subItem}}" class="flex_center_between padding-center" style="height: 100rpx;">
+                <view>
+                  <text style="color: #666;font-size: 22rpx;">{{subItem.showTime}}</text>
+                </view>
+                <view class="flex_column_left" style="width: 150rpx;padding-left: 20rpx;">
+                  <text class="oneText" style="font-size: 28rpx;color: #333;">{{subItem.stockName}}</text>
+                  <text style="color: #999;font-size: 25rpx;">{{subItem.stockCode}}</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+                  <text style="color: #333;font-size: 28rpx;">{{tool.num2(subItem.cost)}}</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+                  <text style="color: #333;font-size: 28rpx;">{{tool.num2(subItem.shareNum)}}手</text>
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+
+        <!-- 持仓 -->
+        <block wx:if="{{isShowSub && subIndex == index && showSubs[4]}}" >
+          <view style="background-color: #F5F5F5;height: 80rpx;" class="flex_center_between padding-center">
+            <view style="width: 150rpx;">
+              <text style="color: #666;font-size: 25rpx;">股票名称</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">入仓均价</text>
+            </view>
+            <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">持仓比例</text>
+            </view>
+            <view style="width: 150rpx;" class="flex_center_center">
+              <text style="color: #666;font-size: 25rpx;">持仓时间</text>
+            </view>
+          </view>
+          <view style="background-color: #f8f8f8;height: 50vh;width: 100vw;overflow-y: scroll;overflow-x: hidden;">  
+            <block wx:for="{{subList}}" wx:key="kes" wx:for-index="row" wx:for-item="subItem">
+              <view catchtap="go_to_stock" data-item="{{subItem}}" class="flex_center_between padding-center" style="height: 100rpx;">
+                
+                <view class="flex_column_left" style="width: 150rpx;">
+                  <text class="oneText" style="font-size: 28rpx;color: #333;">{{subItem.stockName}}</text>
+                  <text style="color: #999;font-size: 25rpx;">{{subItem.stockCode}}</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+                  <text style="color: #333;font-size: 28rpx;">{{tool.num2(subItem.cost)}}</text>
+                </view>
+                <view style="width: calc((100% - 300rpx) / 2);" class="flex_center_center">
+                  <text style="color: #333;font-size: 28rpx;">{{tool.num2(subItem.shareNum)}}手</text>
+                </view>
+                <view style="width: 150rpx;" class="flex_center_center">
+                  <text style="color: var(--themeColor);font-size: 22rpx;">{{subItem.holdingTime}}</text>
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+        <!------>
+
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+    <block wx:for="{{list}}" wx:key="ss">
+      <view slot="item" catchtap="tap_doc_info" data-index="{{index}}" class="flex_center_between bottom-border padding-center" style="height: 220rpx;background-color: white;">
+        <view class="flex_column" style="height: 140rpx;width: calc(100% - 220rpx);justify-content: space-between;">
+          <text class="twoText">{{item.content}}</text>
+          <view class="flex_left_center">
+            <iconfont name="yuanchuang" color="#999" size="15"></iconfont>
+            <text style="color:#999;font-size: 25rpx;margin-left: 5rpx;">原创</text>
+            <iconfont style="margin-left: 10rpx;" size="15"  color="#999" name="chakan"></iconfont>
+            <text style="color:#999;font-size: 25rpx;margin-left: 5rpx;">{{item.forwardNum}}</text>
+            <iconfont style="margin-left: 10rpx;" size="15" color="#999" name="fenxiang"></iconfont>
+            <text style="color:#999;font-size: 25rpx;margin-left: 5rpx;">{{item.collectNum}}</text>
+            <iconfont style="margin-left: 10rpx;" size="15" color="#999" name="shijian"></iconfont>
+            <text style="color:#999;font-size: 25rpx;margin-left: 5rpx;">{{item.showTime}}</text>
+          </view>
+        </view>
+        <image wx:if="{{item.titleImg.length > 0}}" style="border-radius: 10rpx;background-color: var(--themeColor);width: 220rpx;height: 140rpx;" src=""></image>
+      </view>
+    </block>
+  </block> 
+
+</cus_page>

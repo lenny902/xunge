@@ -1,0 +1,114 @@
+
+<!-- 非自适应 -->
+<block wx:if="{{!is_self_adaption}}">
+
+<!--操作模式下的alert 4个部分可自定义的header 可自定义的item 可自定义的固定bottom 可自定义的操作栏 -->
+<block wx:if="{{isOperateAlert}}">
+  <!-- 有浅黑背景部分 -->
+  <view wx:if="{{isMark}}" catchtap="{{isHideAlertByBg?'tap_to_cancel':''}}"  class="clistMark {{alertPosIndex == 0?'flex_center_center':(alertPosIndex == 1?'flex_center_bottom':'flex_center_top')}} ">
+    <view catchtap="tap_to" style="width:{{width}};height:{{height}};border-radius:10rpx;padding:0rpx 30rpx;">
+      <view wx:if="{{isHeader}}" style="width:100%;height:{{headerHeight}}rpx;" class="flex_center_center">
+        <text wx:if="{{!isHeaderSetting}}" style="font-weight:bold">{{title}}</text>
+        <slot name="header"></slot>
+      </view>
+      <scroll-view scroll-y="true"  style="width:100%;height:calc(100% - {{isHeader?headerHeight:0}}rpx  - {{bottomHeight + 2 +  opHeight}}rpx);">
+        <slot name="item"></slot>
+      </scroll-view>
+
+      <view  style="width:100%;height:{{bottomHeight}}rpx;" class="flex_center_center">
+        <slot name="bottom"></slot>
+      </view>
+      <view wx:if="{{opHeight > 0}}" style="width:100%;height:{{opHeight}}rpx;border-top:1px solid #e5e5e5" class="flex_left_center">
+        
+        <view catchtap="tap_to_cancel" wx:if="{{isCancel}}" style="width:50%;height:100%;border-right:1px solid #e5e5e5;  " class="flex_center_center">
+          <text style="color:{{cancelColor}}">{{cancel}}</text>
+        </view>
+        <view catchtap="tap_to_sure" wx:if="{{isCancel}}" style="width:50%;height:100%" class="flex_center_center">
+          <text style="color:{{sureColor}}">{{sure}}</text>
+        </view>
+        <view catchtap="tap_to_sure" wx:if="{{!isCancel}}" style="width:100%;height:100%" class="flex_center_center">
+          <text style="color:{{sureColor}}">{{sure}}</text>
+        </view>
+      </view> 
+    </view>
+  </view>
+
+  <!-- 无浅黑背景部分 -->
+  <view wx:if="{{!isMark}}" catchtap="tap_to" class="flex_center_center" style="position:fixed;width:calc({{width}}  - 60rpx);height:{{height}};  left:calc((100% - {{width}}) / 2);{{alertPosIndex == 0?'bottom:calc((100% - ' + height  +  ') / 2);':(alertPosIndex == 1?'bottom:0rpx;':'top:0rpx;')}} border-radius:10rpx;padding:0rpx 30rpx;">
+    <view style="width:100%;height:100%;">
+      <view wx:if="{{isHeader}}" style="width:100%;height:{{headerHeight}}rpx;" class="flex_center_center">
+        <text wx:if="{{!isHeaderSetting}}" style="font-weight:bold">{{title}}</text>
+        <slot name="header"></slot>
+      </view>
+      <scroll-view scroll-y="true"  style="width:100%;height:calc(100% - {{isHeader?headerHeight:0}}rpx  - {{bottomHeight + 2 +  opHeight}}rpx);">
+        <slot name="item"></slot>
+      </scroll-view>
+
+      <view  style="width:100%;height:{{bottomHeight}}rpx;" class="flex_center_center">
+        <slot name="bottom"></slot>
+      </view>
+      <view wx:if="{{opHeight > 0}}" style="width:100%;height:{{opHeight}}rpx;border-top:1px solid #e5e5e5" class="flex_left_center">
+        
+        <view catchtap="tap_to_cancel" wx:if="{{isCancel}}" style="width:50%;height:100%;border-right:1px solid #e5e5e5;  " class="flex_center_center">
+          <text style="color:{{cancelColor}}">{{cancel}}</text>
+        </view>
+        <view catchtap="tap_to_sure" wx:if="{{isCancel}}" style="width:50%;height:100%" class="flex_center_center">
+          <text style="color:{{sureColor}}">{{sure}}</text>
+        </view>
+        <view catchtap="tap_to_sure" wx:if="{{!isCancel}}" style="width:100%;height:100%" class="flex_center_center">
+          <text style="color:{{sureColor}}">{{sure}}</text>
+        </view>
+      </view> 
+    </view>
+    </view>
+  </block>
+
+
+  <!-- 疑问解答模式 -->
+  <view wx:if="{{!isOperateAlert && isShowNoOperateAlert}}" class="clistMark flex_center_center">
+    <view style="width:70%;" class="clear-bg-color" >
+      <view style="padding:20rpx 30rpx 50rpx 30rpx;border-radius:10rpx;" >
+        <view class="flex_left_center" >
+          <mp-icon type="field" icon='help' color="#757575"></mp-icon><text style="margin-left:10rpx;font-weight:bold;color:#757575">疑问解答</text>
+        </view>
+        <view  style="margin-top:20rpx;" >
+          <text style="font-size:28rpx;color:#656565;word-wrap: break-word;word-break: normal;"><text style="font-size:28rpx;color:{{noOperateAlertColor}}">{{noOperateAlertHeaderText}}</text>{{noOperateAlertText}}</text>
+        </view>
+      </view>
+      <view style="height:120rpx;" class="flex_center_bottom clear-bg-color">
+        <image catchtap="tap_to_close" src="../cus_alert/close.png" style="width:70rpx;height:70rpx;"></image>
+      </view>
+    </view>
+  </view>
+</block>
+
+
+
+<!-- 自适应高度模式直接居中 -->
+<block wx:else>
+  <view  class="clistMark flex_center_center">
+    <view style="width:{{width}};border-radius:10rpx;">
+      <view class="margin-center">
+        <view wx:if="{{isHeader}}" style="height:100rpx;" class="flex_center_center">
+          <text style="font-weight:bold">{{title}}</text>
+        </view>
+        <view style="width:100%">
+          <slot name="item"></slot>
+        </view>
+
+        <view wx:if="{{opHeight > 0}}" style="width:100%;height:{{opHeight}}rpx;border-top:1px solid #e5e5e5" class="flex_left_center">
+        
+          <view catchtap="tap_to_cancel" wx:if="{{isCancel}}" style="width:50%;height:100%;border-right:1px solid #e5e5e5;  " class="flex_center_center">
+            <text style="color:{{cancelColor}}">{{cancel}}</text>
+          </view>
+          <view catchtap="tap_to_sure" wx:if="{{isCancel}}" style="width:50%;height:100%" class="flex_center_center">
+            <text style="color:{{sureColor}}">{{sure}}</text>
+          </view>
+          <view catchtap="tap_to_sure" wx:if="{{!isCancel}}" style="width:100%;height:100%" class="flex_center_center">
+            <text style="color:{{sureColor}}">{{sure}}</text>
+          </view>
+        </view> 
+      </view>
+    </view>
+  </view>
+</block>

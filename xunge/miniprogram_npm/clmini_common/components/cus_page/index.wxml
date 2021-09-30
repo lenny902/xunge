@@ -1,0 +1,62 @@
+<view style="width:100%;height:50%;background-color:{{topBg}};position:fixed;left:0rpx;top:0rpx;"></view>
+<!-- 自定义标题 -->
+<custom-header 
+  wx:if="{{isHeader}}"
+  id="header"
+  left_img="{{left_img}}"
+  img_size="{{img_size}}"
+  left_icon="{{left_icon}}"
+  icon_size="{{icon_size}}"
+  title="{{title}}"
+  operate_type="{{operate_type}}"
+  is_show_back="{{is_show_back}}"
+  is_title_center="{{is_title_center}}"
+  bg_color="{{bg_color}}"
+  color="{{color}}"
+>
+  <view class="clear-bg-color">
+    <slot name="ss"></slot>
+  </view>
+</custom-header>
+
+<!-- 当header有值是真正的第二header -->
+<view wx:if="{{isHeader &&  second_header_height > 0}}" class="second-header" style="height:{{second_header_height}}rpx;top:calc({{barH}} + {{first_space_height}}rpx);">
+  <slot name="header"></slot>
+</view>
+<!-- 当没有header的时候第二header作为第一 header自定义，并且需要过滤掉statusheight -->
+<view wx:if="{{!isHeader && second_header_height > 0}}" class="second-header" style="height:{{second_header_height}}rpx;top:0rpx;">
+  <view  style="width:100%;height:{{statusHeight}};background-color:{{bg_color}};"></view>
+  <view style="background-color:{{bg_color}};width:100%;height:calc(100% - {{statusHeight}});">
+    <slot  name="header"></slot>
+  </view>
+</view>
+<!-- bottom:calc({{src_bottom}} +  {{bottom_view_height}}rpx) -->
+<!-- enhanced="{{true}}" -->
+<scroll-view id="scrollView"   scroll-top="{{scrollPostion}}" enable-flex="{{isFlex}}" refresher-enabled="{{isOpenRefresh}}" bindrefresherrefresh="refresh" refresher-triggered="{{isEnd}}" upper-threshold="50" bindscrolltoupper="bindscrolltoupper"   lower-threshold="50"  bindscrolltolower="bindscrolltolower" scroll-with-animation="{{scrollPostionAnimation}}" scroll-y="true" class='content'  style='top:{{scr_top}};bottom:calc({{src_bottom}} +  {{bottom_view_height}}rpx)'>
+  <!-- 当没有header和secondheade的时候设置view 过滤掉statusheight -->
+  <!-- <view wx:if="{{!isHeader && second_header_height <=  0}}" style="width:100%;height:{{statusHeight}};background-color:{{bg_color}};"></view> -->
+  <slot name="item"></slot>
+  <view  wx:if="{{isMoring && isMore}}"  style="width:100%;height:100rpx;background-color:#f5f5f5" class="flex_center_center" >
+    <!-- <mp-loading type="circle" ext-class="loadback"></mp-loading> -->
+    <text style="font-size:26rpx;color:#858585">加载中...</text>
+  </view> 
+</scroll-view>
+
+<!-- bottom -->
+<view class="bottom_view flex_center_center" style="height:{{bottom_view_height}}rpx;bottom:{{src_bottom}}">
+  <slot name="bottom"></slot>
+</view>
+
+
+
+<!-- 额外的页面自带 -->
+<!-- 自带疑问接到的alert -->
+<cus_alert
+  isOperateAlert="{{false}}"
+  id="noOperateAlert"
+></cus_alert>
+
+<!-- 自带红色头部alert提示1秒后消失 headeralert -->
+<view  wx:if="{{isShowAlert}}" class="alert-view flex_center_center" style="top:{{alertTop}}" >
+  <text style="color:white;font-size:27rpx">{{alertText}}</text>
+</view>

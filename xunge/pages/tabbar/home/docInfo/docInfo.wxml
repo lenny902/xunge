@@ -1,0 +1,35 @@
+<!--pages/tabbar/home/docInfo/docInfo.wxml-->
+<cus_page
+  title="详情"
+  bg_color="var(--themeColor)"
+  operate_type="{{1}}"
+  bind:tap_left="tap_left"
+  >
+    <view slot="item" class="padding-center">
+      <text>{{item.title}}</text>
+      <view class="flex_left_center" style="margin-top: 20rpx;">
+          <iconfont name="yuanchuang" color="#999" size="15"></iconfont>
+          <text style="color:#999;font-size: 25rpx;margin-left: 5rpx;">原创</text>
+          <iconfont style="margin-left: 10rpx;" size="15"  color="#999" name="chakan"></iconfont>
+          <text style="color:#999;font-size: 25rpx;margin-left: 5rpx;">{{item.forwardNum}}</text>
+          <iconfont style="margin-left: 10rpx;" size="15" color="#999" name="fenxiang"></iconfont>
+          <text style="color:#999;font-size: 25rpx;margin-left: 5rpx;">{{item.collectNum}}</text>
+          <iconfont style="margin-left: 10rpx;" size="15" color="#999" name="shijian"></iconfont>
+          <text style="color:#999;font-size: 25rpx;margin-left: 5rpx;">{{item.showTime}}</text>
+        </view>
+    </view>
+    <view slot="item" class="padding-center" style="margin-top: 20rpx;color: #666;font-size: 26rpx;">
+      {{item.content}}
+    </view>
+    <view slot="item" style="position: fixed;bottom: 0;left: 0;right: 0;height: 150rpx;background:-webkit-linear-gradient(top,rgba(0,0,0,0),rgba(255,255,255,0.2),rgba(255,255,255,1));" class="flex_center_center">
+      <button open-type="share" class="fenxiang" style="background-color: var(--themeColor);width: 90rpx;height: 90rpx;border-radius: 50%;" class="flex_center_center">
+        <iconfont name="fenxiang1" color="white"></iconfont>
+      </button>
+      <button catchtap="shoucang" style="margin-left: 50rpx;background-color: var(--themeColor);width: 90rpx;height: 90rpx;border-radius: 50%;" class="flex_center_center">
+        <iconfont name="shoucang" color="white"></iconfont>
+      </button>
+      <button catchtap="daochu" style="margin-left: 50rpx;background-color: var(--themeColor);width: 90rpx;height: 90rpx;border-radius: 50%;" class="flex_center_center">
+        <iconfont name="daochu" color="white"></iconfont>
+      </button>
+    </view>
+  </cus_page>

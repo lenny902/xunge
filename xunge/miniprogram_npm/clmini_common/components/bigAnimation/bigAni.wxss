@@ -1,0 +1,3 @@
+/* components/gift/bigAni.wxss */
+
+@import "../../css/common.wxss";

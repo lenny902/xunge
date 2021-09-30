@@ -1,0 +1,13 @@
+<!--component/top_bar/top_bar.wxml-->
+<view style="background-color: white;height: {{high}}rpx;" class="flex_center_center bottom-border">
+  <block wx:for="{{items}}" wx:key="ss">
+    <view catchtap="tap_topIndex" data-index="{{index}}" class="flex_cloumn_center h100">
+        <view style="height: {{high - 2}}rpx;width: calc(100vw / {{items.length}});" class="w100 flex_center_center">
+          <text style="font-size: {{textSize}}rpx;color: {{topIndex == index ? 'var(--themeColor)' : '#333333'}};">{{item}}</text>
+        </view>
+        <view class="w100 flex_center_center">
+          <view style="width: 20rpx;height: 4rpx;background-color:{{topIndex == index ? 'var(--themeColor)' : 'transparent'}};"></view>
+        </view>
+      </view>
+    </block>
+    </view>

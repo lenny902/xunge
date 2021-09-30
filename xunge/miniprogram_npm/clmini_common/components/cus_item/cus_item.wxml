@@ -1,0 +1,25 @@
+
+<view catchtap="{{is_tap_event?'tap_to_item':''}}" catchlongpress="long_tap_item" class="bg flex_left_center" style="{{ext_style}};margin-left:{{margin_value}}rpx;width:calc(100% - 2 *{{pdlr}}rpx - 2 * {{margin_value}}rpx);padding: 0rpx {{pdlr}}rpx;height: {{height}}rpx;{{isBottomBorder?'border-bottom:1px solid #f5f5f5':''}}" >
+  <view style="width:{{isLeftMore?leftPer:'40%'}}; :100%" class="flex_left_center">
+    <view wx:if="{{imgUrl.length > 0}}" style="height:100%;width:{{height * 0.6}}rpx;" class="flex_left_center">
+      <image src="{{imgUrl}}" style="height:{{height * 0.6}}rpx;width:{{height * 0.6}}rpx;border-radius:{{height * 0.6}}rpx;"></image>
+    </view>
+    <view  style="{{imgUrl.length > 0 ? 'margin-left:20rpx;width:calc(100% - ' + (height * 0.6 - 20) + 'rpx' + ');':'width:100%;'}}height:100%;" class="textEll_One flex_left_center">
+      <slot name="leftTitle"></slot>
+    </view>
+  </view>
+  <view style="width:{{isLeftMore?rightPer:'60%'}};height:100%;" class="flex_right_center">
+    <view  wx:if="{{isrightTow}}" style="width:50%;height:100%;" class="flex_left_center" >
+      <slot name="righttow"></slot>
+    </view>
+    <view style="width:{{isrightTow?'50%':'100%'}};height:100%" class="flex_right_center">
+      <view style="width:calc(100% - {{arrowWidth}}rpx);height:100%;" class="flex_right_center"> 
+        <slot name="rightone"></slot>
+      </view>
+      <view wx:if="{{arrowWidth > 0}}" style="width:{{arrowWidth}}rpx;height:100%;" class="flex_right_center">
+        <mp-icon  wx:if="{{!isRightImg}}" icon="arrow" color="#a5a5a5" size="13"></mp-icon>
+        <slot name="rightimg"></slot>
+      </view>
+    </view>
+  </view>
+</view>

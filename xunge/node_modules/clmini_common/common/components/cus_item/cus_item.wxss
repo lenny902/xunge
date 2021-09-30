@@ -1,0 +1,4 @@
+/* components/cus_item/cus_item.wxss */
+
+@import "../../css/common.wxss";
+

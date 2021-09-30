@@ -1,0 +1,58 @@
+<!--pages/tabbar/opt/opt.wxml-->
+<cus_page
+  title="自选"
+  bg_color="var(--themeColor)"
+  is_show_back="{{false}}"
+  first_space_height="{{0}}"
+  second_header_height="{{160}}"
+>
+
+  <view slot="header" style="height: 160rpx;">
+    <top_bar 
+      high="{{100}}"
+      bind:tapIndex="tap_topIndex"
+      items="{{topItems}}"
+    ></top_bar>
+    <view wx:if="{{topIndex==0}}" style="height: 60rpx;background-color: #F5F5F5;" class="flex_center_between padding-center">
+      <text style="font-size: 28rpx;color: #999;width: 200rpx;">基金名称</text>
+      <text style="font-size: 28rpx;color: #999;">涨幅</text>
+      <text style="font-size: 28rpx;color: #999;">净值</text>
+      <text style="font-size: 28rpx;color: #999;">年化收益</text>
+      <text style="font-size: 28rpx;color: #999;">成立时间</text>
+    </view>
+    <view wx:else style="height: 60rpx;background-color: #F5F5F5;" class="flex_center_between padding-center">
+      <text style="font-size: 28rpx;color: #999;width: 200rpx;">股票名称</text>
+      <text style="font-size: 28rpx;color: #999;">建仓</text>
+      <text style="font-size: 28rpx;color: #999;">增仓</text>
+      <text style="font-size: 28rpx;color: #999;">减仓</text>
+      <text style="font-size: 28rpx;color: #999;">清仓</text>
+      <text style="font-size: 28rpx;color: #999;">持仓</text>
+    </view>
+  </view>
+
+  <block wx:for="{{list}}">
+    <view catchtap="go_to_fundInfo" data-index="{{index}}" slot="item" wx:if="{{topIndex==0}}" style="height: 100rpx;background-color: white;" class="flex_center_between padding-center bottom-border">
+      <view style="width: 200rpx;" class="flex_column_left">
+        <text class="oneText" style="font-size: 28rpx;color: #666">{{item.fundName}}</text>
+        <text style="font-size: 25rpx;color: #999">{{item.fundCode}}</text>
+      </view>
+      <text style="font-size: 28rpx;color:{{item.upRate >= 0 ? 'red' : 'green'}}">{{item.upRate}}</text>
+      <text style="font-size: 28rpx;color: #0A8AFA;">{{item.allYield}}</text>
+      <text style="font-size: 28rpx;color: #999;">{{item.annualizedYield}}</text>
+      <text style="font-size: 28rpx;color: #999;">{{item.buildDt}}</text>
+    </view>
+    <view catchtap="go_to_stockInfo" data-index="{{index}}"  slot="item" wx:else style="height: 100rpx;background-color: white;" class="flex_center_between padding-center bottom-border">
+      <view style="width: 200rpx;" class="flex_column_left">
+        <text class="oneText" style="font-size: 28rpx;color: #666">{{item.stockName}}</text>
+        <text style="font-size: 25rpx;color: #999">{{item.stockCode}}</text>
+      </view>
+      <text style="font-size: 28rpx;color: #FF9900;">{{item.buildHoldings}}</text>
+      <text style="font-size: 28rpx;color: #FF4646;">{{item.addHoldings}}</text>
+      <text style="font-size: 28rpx;color: #15D280;">{{item.subHoldings}}</text>
+      <text style="font-size: 28rpx;color: #333333;">{{item.dumpHoldings}}</text>
+      <text style="font-size: 28rpx;color: #0A8AFA;">{{item.allHoldings}}</text>
+    </view>
+  </block>
+
+
+</cus_page>

@@ -1,0 +1,252 @@
+<!--pages/tabbar/fund/fundInfo.wxml-->
+
+<wxs module="tool" src="/utils/tool.wxs"></wxs>
+<cus_page
+  title="基金.详情"
+  bg_color="var(--themeColor)"
+  first_space_height="{{0}}"
+>
+  <view slot="item" style="position: relative;">
+    <view style="position: absolute;left: -50vw;top: -175vw;width: 200vw;height: 200vw;background-color: var(--themeColor);z-index: -1;border-bottom-right-radius: 100vw;border-bottom-left-radius: 100vw;"></view>
+    <view class="margin-center-padding-border" style="background-color:#FFFFFF;opacity: 0.9;">
+      <view style="height: 100rpx;" class="flex_left_center">
+        <text class="oneText">{{overInfo.fundName}}</text>
+      </view>
+      <view class="flex_row_wrap">
+        <block wx:for="{{overArr}}">
+          <view style="background-color: rgba(34, 162, 244,0.1);margin-right: 10rpx;margin-bottom: 10rpx;border-radius: 5rpx;">
+            <text style="padding:10rpx 20rpx;color: var(--themeColor);font-size: 24rpx;">{{item}}</text>
+          </view>
+        </block>
+      </view>
+      <view class="flex_center_between">
+        <view style="height: 150rpx;width: 50%;" class="flex_center">
+          <text style="color: var(--themeColor);">{{overInfo.netWorth}}</text>
+          <text style="font-size: 25rpx;color: #999;">最新净值</text>
+        </view>
+        <view style="height: 120rpx;width: 50%;" class="flex_center">
+          <text style="color: {{overInfo.upRate > 0 ? 'red' : 'green'}};">{{overInfo.upRate}}%</text>
+          <text style="font-size: 25rpx;color: #999;">日涨跌幅</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view slot="item" class="margin-center-border" style="margin-top: 20rpx;background-color: white;">
+    <view style="height: 100rpx;" class="flex_left_center">
+      <view style="height: 30rpx;width: 5rpx;background-color: var(--themeColor);"></view>
+      <text style="margin-left: 15rpx;">累计收益</text>
+    </view>
+    <view class="padding-center">
+      <view class="padding-center flex_center_between" style="height: 100rpx;">
+        <view class="flex_center">
+          <view class="flex_left_center">
+            <view style="height: 5rpx;width: 30rpx;background-color: var(--themeColor);"></view>
+            <text style="font-size: 28rpx;margin-left: 10rpx;">本基金</text>
+          </view>
+          <text style="color: {{profit.fundProfit > 0 ? 'red' : 'green'}};margin-left: 40rpx;font-size: 26rpx;font-weight: bold;">{{profit.fundProfit}}%</text>
+        </view>
+        <view class="flex_center">
+          <view class="flex_left_center">
+            <view style="height: 5rpx;width: 30rpx;background-color: #00FFEA;"></view>
+            <text style="font-size: 28rpx;margin-left: 10rpx;">同类平均</text>
+          </view>
+          <text style="color: {{profit.avgrage > 0 ? 'red' : 'green'}};margin-left: 40rpx;font-size: 26rpx;font-weight: bold;">{{profit.avgrage}}%</text>
+        </view>
+        <view class="flex_center">
+          <view class="flex_left_center">
+            <view style="height: 5rpx;width: 30rpx;background-color: #FFA200;"></view>
+            <text style="font-size: 28rpx;margin-left: 10rpx;">沪深3</text>
+          </view>
+          <text style="color: {{profit.hs300 > 0 ? 'red' : 'green'}};margin-left: 40rpx;font-size: 26rpx;font-weight: bold;">{{profit.hs300}}%</text>
+        </view>
+      </view>
+      <view style="height: 500rpx;width: 80vw;">
+        <eLine id="eline"></eLine>
+      </view>
+      <view class="flex_center_between" style="height: 80rpx;">
+        <block wx:for="{{fenList}}" wx:key="ids">
+          <view catchtap="tap_fen_select" data-index="{{index}}" wx:if="{{!item.isSelect}}" class="flex_center_center">
+            <text style="color: #999;font-size: 24rpx;">{{item.name}}</text>
+          </view>
+          <view wx:else class="flex_center_center" style="border-radius: 50%;background-color: rgb(34, 162, 244,0.2);padding:10rpx 20rpx">
+            <text style="color: var(--themeColor);font-size: 28rpx;">{{item.name}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view slot="item" class="margin-center-border" style="margin-top: 20rpx;background-color: white;padding-bottom: 30rpx;">
+    <view style="height: 100rpx;" class="flex_left_center">
+      <view style="height: 30rpx;width: 5rpx;background-color: var(--themeColor);"></view>
+      <text style="margin-left: 15rpx;">基本信息</text>
+    </view>
+    <view class="padding-center">
+      <block wx:for="{{baseList}}" wx:key="ks">
+        <view class="flex_left_center" style="height: 60rpx;">
+          <text style="color:#999;font-size: 25rpx;">{{item.name}}</text>
+          <text class="oneText" style="font-size: 25rpx;margin-left: 20rpx;">{{item.value}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view slot="item" class="margin-center-border" style="margin-top: 20rpx;background-color: white;padding-bottom: 30rpx;">
+    <view style="height: 100rpx;" class="flex_left_center">
+      <view style="height: 30rpx;width: 5rpx;background-color: var(--themeColor);"></view>
+      <text style="margin-left: 15rpx;">基金经理</text>
+    </view>
+    <view class="padding-center">
+      <view class="flex_left_center">
+        <view style="width: 100rpx;height: 100rpx;border-radius: 50%;border: 1px var(--themeColor) solid;overflow: hidden;">
+          <image src="{{managerInfo.photo}}" style="width: 100rpx;height: 100rpx;"></image>
+        </view>
+        <view style="width: 100rpx;" class="flex_center">
+          <text style="color: #999;font-size: 24rpx;">姓名</text>
+          <text style="color: #333;font-size: 24rpx; margin-top: 20rpx;">{{managerInfo.managerName}}</text>
+          <text style="font-size: 23rpx;color: #999;">.</text>
+        </view>
+        <view style="width: 100rpx;" class="flex_center">
+          <text style="color: #999;font-size: 24rpx;">任期回报</text>
+          <text style="color: {{tool.hasSub(managerInfo.returnRate) ? 'green' : 'red' }};font-size: 24rpx; margin-top: 20rpx;">{{managerInfo.returnRate}}</text>
+          <text style="font-size: 23rpx;color: #999;">.</text>
+        </view>
+        <view style="width: calc(100%-300rpx);padding-left: 20rpx;" class="flex_column_left">
+          <text style="color: #999;font-size: 24rpx;">任期</text>
+          <text style="color: #333;font-size: 24rpx; margin-top: 20rpx;">{{managerInfo.startDt+' '+managerInfo.endDt}}</text>
+          <text style="font-size: 23rpx;color: #999;">{{managerInfo.manageDays}}</text>
+        </view>
+      </view>
+      <view>
+        <text class="twoText" style="color: #666;font-size: 24rpx;">{{managerInfo.content}}</text>
+      </view>
+      <view class="flex_center_between" style="height: 100rpx;">
+        <view style="width: 20%;">
+          <text style="color: #999;font-size: 24rpx;">股票名称</text>
+        </view>
+        <view style="width: 20%;">
+          <text style="color: #999;font-size: 24rpx;">持仓占比</text>
+        </view>
+        <view style="width: 20%;">
+          <text style="color: #999;font-size: 24rpx;">涨跌幅</text>
+        </view>
+        <view style="width: 20%;">
+          <text style="color: #999;font-size: 24rpx;">较上期</text>
+        </view>
+        <view style="width: 50rpx">
+          <text style="color: #999;font-size: 24rpx;">自选</text>
+        </view>
+      </view>
+      <block wx:for="{{stockList}}" wx:key="kes">
+        <view class="flex_center_between" style="height: 80rpx;">
+          <view style="width: 20%;" class="flex_column_left">
+            <text style="color: #333;font-size: 24rpx;">{{item.stockName}}</text>
+            <text style="color: #999;font-size: 20rpx;">{{item.stockCode}}</text>
+          </view>
+          <view style="width: 20%;">
+            <text style="color: #333;font-size: 24rpx;">{{item.stock_ratio}}</text>
+          </view>
+          <view style="width: 20%;">
+            <text style="color: {{item.stockRate>0?'red':'green'}};font-size: 24rpx;">{{item.stockRate}}%</text>
+          </view>
+          <view style="width: 20%;">
+            <text style="color: {{tool.hasSub(item.contrast) ? 'green' : 'red'}};font-size: 24rpx;">{{item.contrast}}</text>
+          </view>
+          <view style="width: 50rpx">
+            <mp-icon catchtap="addStock" data-item="{{item}}" wx:if="{{!item.optionalFlag}}" size="15" icon="add" color="var(--themeColor)"></mp-icon>
+            <mp-icon catchtap="subStock" data-item="{{item}}" wx:else icon="close" size="15" color="red"></mp-icon>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view slot="item" class="margin-center-border" style="margin-top: 20rpx;background-color: white;padding-bottom: 30rpx;">
+    <view style="height: 100rpx;" class="flex_center_between">
+      <view style="height: 100%;" class="flex_left_center">
+        <view style="height: 30rpx;width: 5rpx;background-color: var(--themeColor);"></view>
+        <text style="margin-left: 15rpx;">基金规模</text>
+      </view>
+      <view class="flex_right_center" style="padding-right: 20rpx;">
+        <text style="font-size: 24rpx;color: #999;">更新时间：{{nowTime}}</text>
+        <text style="font-size: 24rpx;color: #999;margin-left: 20rpx;">单位：人民币</text>
+      </view>
+    </view>
+    <view class="padding-center" style="height: 500rpx;width: 80vw;">
+      <bar id="bar"></bar>
+    </view>
+  </view>
+
+  <view slot="item" class="margin-center-border" style="margin-top: 20rpx;background-color: white;padding-bottom: 30rpx;">
+    <view style="height: 100rpx;" class="flex_left_center">
+      <view style="height: 30rpx;width: 5rpx;background-color: var(--themeColor);"></view>
+      <text style="margin-left: 15rpx;">基金经理变动</text>
+    </view>
+    <view class="padding-center">
+      <view class="flex_left_center">
+        <view style="width: 25%;">
+          <text style="color:#999;font-size: 25rpx;">起始期</text>
+        </view>
+        <view style="width: 25%;">
+          <text style="color:#999;font-size: 25rpx;">截止期</text>
+        </view>
+        <view style="width: 25%;">
+          <text style="color:#999;font-size: 25rpx;">基金经理</text>
+        </view>
+        <view style="width: 25%;" class="flex_center_center">
+          <text style="color:#999;font-size: 25rpx;">任期回报</text>
+        </view>
+      </view>
+      <block wx:for="{{managers}}">
+        <view class="flex_left_center">
+          <view style="width: 25%;">
+            <text style="color:#666;font-size: 25rpx;">{{item.startDt}}</text>
+          </view>
+          <view style="width: 25%;">
+            <text style="color:#666;font-size: 25rpx;">{{item.endDt}}</text>
+          </view>
+          <view style="width: 25%;">
+            <text class="oneText" style="color:#666;font-size: 25rpx;">{{item.manger}}</text>
+          </view>
+          <view style="width: 25%;" class="flex_center_center">
+            <text style="color:{{tool.hasSub(item.employmentReturn) ? 'green' : 'red'}};font-size: 25rpx;">{{item.employmentReturn}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view slot="item" class="margin-center-border" style="margin-top: 20rpx;background-color: white;padding-bottom: 30rpx;">
+    <view style="height: 100rpx;" class="flex_left_center">
+      <view style="height: 30rpx;width: 5rpx;background-color: var(--themeColor);"></view>
+      <text style="margin-left: 15rpx;">投资范围</text>
+    </view>
+    <view class="padding-center">
+      <text style="font-size: 25rpx;">{{baseInfo.scope}}</text>
+    </view>
+  </view>
+
+  <view slot="item" class="margin-center-border" style="margin-top: 20rpx;background-color: white;padding-bottom: 30rpx;">
+    <view style="height: 100rpx;" class="flex_left_center">
+      <view style="height: 30rpx;width: 5rpx;background-color: var(--themeColor);"></view>
+      <text style="margin-left: 15rpx;">风险收益特征</text>
+    </view>
+    <view class="padding-center">
+      <text style="font-size: 25rpx;">{{baseInfo.property}}</text>
+    </view>
+  </view>
+
+  <view slot="item" class="margin-center-border" style="margin-top: 20rpx;background-color: white;padding-bottom: 30rpx;">
+    <view style="height: 100rpx;" class="flex_left_center">
+      <view style="height: 30rpx;width: 5rpx;background-color: var(--themeColor);"></view>
+      <text style="margin-left: 15rpx;">投资策略</text>
+    </view>
+    <view class="padding-center">
+      <text style="font-size: 25rpx;">{{baseInfo.strategy}}</text>
+    </view>
+  </view>
+
+  <view slot="item" style="background-color: transparent;height: 30rpx;"></view>
+  
+
+</cus_page>

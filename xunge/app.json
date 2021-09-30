@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/tabbar/home/home",
+    "pages/tabbar/mess/mess",
+    "pages/tabbar/mine/mine",
+    "pages/tabbar/opt/opt",
+    "pages/tabbar/home/docInfo/docInfo",
+    "pages/tabbar/fund/fundInfo",
+    "pages/tabbar/stock/stockInfo",
+    "pages/tabbar/stock/stockBig"
+  ],
+  "window": {
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#22a2f4",
+    "list": [
+      {
+        "pagePath": "pages/tabbar/home/home",
+        "text": "首页",
+        "iconPath": "/img/ic_tabbar_home_0.png",
+        "selectedIconPath": "/img/ic_tabbar_home_1.png"
+      },
+      {
+        "pagePath": "pages/tabbar/mess/mess",
+        "text": "订阅",
+        "iconPath": "/img/ic_tabbar_mess_0.png",
+        "selectedIconPath": "/img/ic_tabbar_mess_1.png"
+      },
+      {
+        "pagePath": "pages/tabbar/opt/opt",
+        "text": "自选",
+        "iconPath": "/img/ic_tabbar_opt_0.png",
+        "selectedIconPath": "/img/ic_tabbar_opt_1.png"
+      },
+      {
+        "pagePath": "pages/tabbar/mine/mine",
+        "text": "我的",
+        "iconPath": "/img/ic_tabbar_mine_0.png",
+        "selectedIconPath": "/img/ic_tabbar_mine_1.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

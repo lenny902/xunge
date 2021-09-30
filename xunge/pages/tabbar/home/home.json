@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "cus_page":"clmini_common/components/cus_page/index",
+    "mp-icon": "weui-miniprogram/icon/icon",
+    "top_bar": "/component/top_bar/top_bar",
+    "top_bar_move": "/component/top_bar/top_bar_move",
+    "iconfont": "/iconfont/iconfont"
+  }
+}

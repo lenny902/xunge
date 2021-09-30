@@ -1,0 +1,16 @@
+/* components/cus_alert/cus_alert.wxss */
+@import "../../css/common.wxss";
+
+.clistMark {
+  width: 100%;
+  height:100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.clist {
+  width: 100%;
+  height:100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0);
+}

@@ -1,0 +1,5 @@
+<!--components/gift/bigAni.wxml-->
+<view style="transform: scale({{scale}});" class="flex_center_center">
+  <slot></slot>
+</view>
+

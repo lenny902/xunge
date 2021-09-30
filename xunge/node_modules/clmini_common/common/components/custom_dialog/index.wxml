@@ -1,0 +1,9 @@
+
+<view class='dialog-bg' 
+      bindtap='_presstoHide'
+      catchtouchmove='handleTouchMove'
+       wx:if="{{isShow}}" ></view>
+
+<view wx:if="{{isShow}}" class='dialog' style="width:{{slot_width}}rpx;height:{{slot_height}}rpx;top:{{top}};left:{{left}}" >
+  <slot></slot>
+</view>

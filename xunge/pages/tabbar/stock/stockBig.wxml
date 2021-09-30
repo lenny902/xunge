@@ -1,0 +1,40 @@
+<!--pages/tabbar/stock/stockBig.wxml-->
+<view style="width: 100%;background-color: white;position: relative;height: 80rpx;">
+  <view style="position: absolute;left: 10rpx;top: 10rpx;">
+    <mp-icon catchtap="close_btn" icon="close" size="15" color="var(--themeColor)"></mp-icon>
+  </view>
+  <view style="margin-left: 40rpx;margin-right: 160rpx;" class="flex_center_between">
+    <view class="flex_column_left">
+      <text>{{stockInfo.stockName}}</text>
+      <text style="color: #999;font-size: 15rpx;">{{stockInfo.stockCode}}</text>
+    </view>
+    <view class="flex_column_left">
+      <text style="color: #999;font-size: 20rpx;">最高</text>
+      <text style="color: #999;font-size: 20rpx;">最低</text>
+    </view>
+    <view class="flex_column_left">
+      <text style="color: red;font-size: 20rpx;">{{todayInfo.high}}</text>
+      <text style="color: green;font-size: 20rpx;">{{todayInfo.low}}</text>
+    </view>
+    <view class="flex_column_left">
+      <text style="color: #999;font-size: 20rpx;">今开</text>
+      <text style="color: #999;font-size: 20rpx;">今收</text>
+    </view>
+    <view class="flex_column_left">
+      <text style="color: red;font-size: 20rpx;">{{todayInfo.open}}</text>
+      <text style="color: #333;font-size: 20rpx;">{{todayInfo.close}}</text>
+    </view>
+  </view>
+</view>
+
+<view style="height: 40rpx;width: 100%;background-color: white;" class="flex_center_between">
+  <block wx:for="{{topItems}}">
+    <view catchtap="tap_topIndex" data-index="{{index}}" style="font-size: 15rpx;width: {{100 / topItems.length}}%;color:{{topIndex == index ? 'var(--themeColor)' : '#666'}}" class="flex_center">
+      <text>{{item}}</text>
+      <view style="height: 2px;width: 20rpx;background-color: {{topIndex == index ? 'var(--themeColor)' : 'white'}};"></view>
+    </view>
+  </block>
+</view>
+<view style="height: 300rpx;width: 100%;background-color: white;">
+  <kLine id="kline"></kLine>
+</view>

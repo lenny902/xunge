@@ -1,0 +1,4 @@
+
+<view  style="width:{{width}};height:{{height}};border-radius:10rpx;background-color:{{timerIndex > 0 ?'#959595':color}}" class="flex_center_center">
+  <text style="color:white;font-size:26rpx;">{{timerIndex > 0?'重发' + timerIndex:'发送验证码'}}</text>
+</view>

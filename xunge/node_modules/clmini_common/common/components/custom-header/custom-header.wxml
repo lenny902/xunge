@@ -1,0 +1,16 @@
+<!-- 自定义标题 -->
+<view class="header" style='height:{{barH}};background-color:{{bg_color}}'>
+  <view style="height:{{statusHeight}};background-color:{{bg_color}}"></view>
+
+  <view class='flex_left_center' style='height:44px;background-color:{{bg_color}}'>
+    <view  wx:if="{{is_show_back}}" bindtap='_pressToLeft' class="flex_center_center" style="width:90rpx;height:100%;background-color:{{bg_color}}">
+      <mp-icon type="field" wx:if="{{!left_img}}" color="{{color}}" icon="{{left_icon}}" size="{{icon_size}}"></mp-icon>
+      <image style="width:{{img_size}}rpx;height:{{img_size}}rpx;" wx:if="{{left_img}}" src='{{left_img}}'></image>
+    </view>
+    <view style="{{titStyle}}">
+      <text class="com-title" style="color:{{color}}">{{title}}</text>
+      <slot></slot>
+    </view>
+  </view>
+
+</view>

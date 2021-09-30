@@ -1,0 +1,3 @@
+<picker mode="multiSelector"  class="clear-bg-color" bindchange="bindPickerChange" bindcolumnchange="bindPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+  <slot name="content"></slot>
+</picker>

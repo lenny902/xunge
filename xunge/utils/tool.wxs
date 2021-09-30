@@ -1,0 +1,16 @@
+
+var num2 = function(str){
+  return Number(str).toFixed(2)
+}
+
+var hasSub = function(str) {
+  if (str) {
+    return str.indexOf('-') >= 0
+  }
+  return false
+}
+
+module.exports = {
+  num2:num2,
+  hasSub:hasSub
+}

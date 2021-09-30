@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "cus_page":"clmini_common/components/cus_page/index",
+    "mp-icon":"weui-miniprogram/icon/icon",
+    "bar":"/component/echart_map/bar",
+    "eLine":"/component/echart_map/eLine"
+  }
+}

@@ -1,0 +1,4 @@
+<!--component/echart_map/kLine.wxml-->
+
+<ec-canvas id="kline" canvas-id="kline" ec="{{ec}}"></ec-canvas>
+

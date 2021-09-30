@@ -1,0 +1,262 @@
+
+
+/* flex */
+/* flex */
+/* flex */
+/* flex x-0.5 y-0.5*/
+.flex_center_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* flex x-0 y-0.5 */
+.flex_left_center {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+/* flex x-0 y-0 */
+.flex_left_top {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+/* flex x-0 y-1 */
+.flex_left_bottom {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end
+}
+/* flex x-0.5 y-0 */
+.flex_center_top {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start
+}
+/* flex x-0.5 y-1 */
+.flex_center_bottom {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end
+}
+
+/* flex x-0.5 左右图 */
+.flex_center_between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* flex x-1 y-0.5 */
+.flex_right_center {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+/* flex x-1 y-0 */
+.flex_right_top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+/* flex x-1 y-1 */
+.flex_right_bottom {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+/* flex_row_wrap */
+.flex_row_wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+/* 竖向布局 */
+.flex_column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 竖向布局左边对其 */
+.flex_column_left{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 竖向布局中边对其 */
+.flex_column_center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 竖向布局右边对其 */
+.flex_column_right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* 文字一行省略 */
+.textEll_One {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+/* 文字一行省略 作用于文字 */
+.oneText {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+
+/* 文字多行省略 */
+.textEll_tow {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* 背景设置为透明 */
+.clear-bg-color{
+  background-color: rgba(1, 1, 1, 0);
+}
+
+
+
+.margin-center{
+  width: calc(100% - 60rpx);
+  margin-left: 30rpx;
+}
+.margin-center-border{
+  width: calc(100% - 60rpx);
+  margin-left: 30rpx;
+  border-radius: 10rpx;
+}
+.margin-center-padding-border {
+  width: calc(100% - 120rpx);
+  margin-left: 30rpx;
+  padding-left:30rpx;
+  padding-right:30rpx;
+  border-radius: 10rpx;
+}
+
+
+
+.margin-center-little-padding-border {
+  width: calc(100% - 84rpx);
+  margin-left: 30rpx;
+  padding-left:12rpx;
+  padding-right:12rpx;
+  border-radius: 10rpx;
+}
+
+.margin-little-center{
+  width: calc(100% - 24rpx);
+  margin-left: 12rpx;
+}
+.margin-little-center-border{
+  width: calc(100% - 24rpx);
+  margin-left: 12rpx;
+  border-radius: 10rpx;
+}
+.margin-little-center-padding-border{
+  width: calc(100% - 84rpx);
+  margin-left: 12rpx;
+  padding-left:30rpx;
+  padding-right:30rpx;
+  border-radius: 10rpx;
+}
+.margin-little-center-little-padding-border{
+  width: calc(100% - 48rpx);
+  margin-left: 12rpx;
+  padding-left:12rpx;
+  padding-right:12rpx;
+  border-radius: 10rpx;
+}
+
+.padding-center{
+  width: calc(100% - 58rpx);
+  padding-left: 30rpx;
+  padding-right:30rpx;
+}
+.padding-little-center{
+  width: calc(100% - 22rpx);
+  padding-left: 12rpx;
+  padding-right:12rpx;
+}
+
+.bottom-border{
+  border-bottom: 0.5px solid #e5e5e5
+}
+.top-border{
+  border-top: 0.5px solid #e5e5e5
+}
+
+.top-bottom-border{
+  border-top: 0.5px solid #e5e5e5;
+  border-bottom: 0.5px solid #e5e5e5
+}
+
+.left-border{
+  border-left:0.5px solid #e5e5e5;
+}
+.right-border{
+  border-right:0.5px solid #e5e5e5;
+}
+
+left-right-border{
+  border-left:0.5px solid #e5e5e5;
+  border-right:0.5px solid #e5e5e5;
+}
+.all-border{
+  border:0.5px solid #e5e5e5
+}
+
+/* 底部button */
+.bottom_btn {
+  width:90%;
+  height: 80%;
+  border-radius: 10rpx;
+}
+.bottom_btn  text{
+  font-size:30rpx;
+  color:white
+}
+
+.nolist{
+  width:100%;
+  height:100%;
+  background-color:#f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nolist text{
+  font-size:30rpx;
+  color:#858585
+}
+
+/* 文字一行省略 */
+.textEll_One {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+/* 文字多行省略 */
+.textEll_tow {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+

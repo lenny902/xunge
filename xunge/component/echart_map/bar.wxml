@@ -1,0 +1,4 @@
+<!--component/echart_map/bar.wxml-->
+
+<ec-canvas id="bar" canvas-id="bar" ec="{{ec}}"></ec-canvas>
+

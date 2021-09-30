@@ -1,0 +1,8 @@
+<!--pages/login/login.wxml-->
+<image style="height: 100vh; width: 100vw;" src="/img/loading.png">
+</image>
+<view class="flex_center_center" style="position: absolute;bottom: 20%;left: 0;right: 0;height: 200rpx;background-color: transparent;">
+  <view catchtap="login_btn" class="flex_center_center" style="background-color: var(--themeColor);width: 60%;height: 100rpx;border-radius: 50rpx;">
+    <text style="color: white;">登录</text>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "custom-header":"../custom-header/custom-header",
+    "cus_dialog":"../custom_dialog/index",
+    "mp-loading": "weui-miniprogram/loading/loading",
+    "cus_alert":"../cus_alert/cus_alert"
+  }
+}

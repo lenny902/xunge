@@ -1,0 +1,30 @@
+.w25 {
+  width: 25%;
+}
+.w33 {
+  width: calc(100% / 3);
+}
+.w100 {
+  width: 100%;
+}
+
+.h100 {
+  height: 100%;
+}
+
+
+.flex_center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.twoText {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}

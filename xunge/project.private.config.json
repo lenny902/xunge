@@ -1,0 +1,30 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/tabbar/fund/fundInfo",
+          "pathName": "pages/tabbar/fund/fundInfo",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/tabbar/stock/stockBig",
+          "pathName": "pages/tabbar/stock/stockBig",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

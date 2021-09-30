@@ -1,0 +1,57 @@
+<!--pages/tabbar/mess/mess.wxml-->
+<cus_page
+  title="寻鸽"
+  bg_color="var(--themeColor)"
+  is_show_back="{{false}}"
+  first_space_height="{{0}}"
+  second_header_height="{{160}}"
+>
+
+  <view slot="ss" style="background-color: rgb(0, 0, 0,0.3);margin-left:20rpx;height: 60rpx;width: calc(100vw - 380rpx);border-radius: 40rpx;" class="flex_left_center">
+    <mp-icon style="margin-left: 10rpx;" icon="search" size="20" color="white"></mp-icon>
+    <text style="font-size: 18rpx;color: white;">搜索感兴趣的股票、基金、私募等</text>
+  </view>
+
+  <view slot="header" style="height: 160rpx;">
+    <view style="height: 60rpx;background-color: var(--themeColor);">
+      <top_bar_move
+        items="{{topItems}}"
+        bgColor="var(--themeColor)"
+        textSize="{{25}}"
+        textSelSize="{{30}}"
+        textColor="#c8FFFFFF"
+        textSelColor="white"
+        lineColor="transparent"
+        high="{{60}}"
+        bind:tapIndex="typeTapIndex"
+      >
+      </top_bar_move>
+    </view>
+    <view style="height: 100rpx;">
+      <top_bar
+        high="{{100}}"
+        items="{{secondTopItems}}"
+        textSize="{{24}}"
+        bind:tapIndex="orderTapIndex"
+      >
+      </top_bar>
+    </view>
+  </view>
+  <block wx:for="{{list}}" wx:key="ss">
+    <view catchtap="go_to_fundInfo" data-item="{{item}}" slot="item" class="flex_center_between padding-center bottom-border" style="height: 200rpx;background-color: white;">
+      <view style="width: 100rpx;height: 100rpx;border-radius: 50%;background-color: #565E66;border: 5rpx #BCBFC3 solid" class="flex_center_center">
+        <text style="color: white;font-size: 40rpx;font-weight: bold;">{{item.targetName[0]}}</text>
+      </view>
+      <view class="flex_column" style="justify-content: space-between;width: calc(100% - 150rpx);">
+        <view class="flex_center_between" >
+          <text class="oneText">{{item.targetName}}</text>
+          <iconfont catchtap="unlike" data-index="{{index}}" wx:if="{{wxId == item.wxId}}" name="zixuanxuanzhong" color="red" size="25"></iconfont>
+          <iconfont catchtap="like" data-index="{{index}}" wx:else name="zixuanmoren" color="#999" size="25"></iconfont>
+        </view>
+        <view class="flex_left_center">
+          <text style="color: #999;font-size: 28rpx;" class="twoText">{{item.targetGoal}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</cus_page>

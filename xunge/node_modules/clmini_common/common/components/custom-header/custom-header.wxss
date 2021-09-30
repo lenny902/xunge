@@ -1,0 +1,14 @@
+@import "../../css/common.wxss";
+
+
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  /* box-shadow: 0rpx 1rpx 4rpx #f0f0f0 */
+}
+.com-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}

@@ -1,0 +1,27 @@
+<view class="wrap" style='border-radius: {{radius}};'>
+  <view  class="content"
+        style="border-radius: {{radius}};right:{{right}}rpx;"
+        bindtouchstart="handleTouchStart"
+        bindtouchmove="handleTouchMove"
+        bindtouchend="handleTouchEnd"
+        bindlongpress="handleLongPress"
+        bindtap="handleTap"
+        data-type="tap_or_press"
+  >
+      <slot/>
+  </view>
+  <view style='border-radius: {{radius}};' class="action-wrap">
+      <view  class="action del" bindtap="handDeleteTap" data-type="slide_del" style='border-radius: {{radius}};'>
+          <text>删除</text>
+      </view>
+  </view>
+</view>
+
+<custom_dialog  slot_width="230" slot_height="60" id="dialog"> 
+  <view bindtap="handDeleteTap" class="dialog_delete_item" data-type="longpress_del">
+    <text>{{showMessage}}</text>
+  </view>
+</custom_dialog>
+
+
+

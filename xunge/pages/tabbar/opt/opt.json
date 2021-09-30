@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "cus_page":"clmini_common/components/cus_page/index",
+    "top_bar": "/component/top_bar/top_bar"
+  }
+}

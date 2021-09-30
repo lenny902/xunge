@@ -1,0 +1,16 @@
+<!--component/top_bar/top_bar_move.wxml-->
+<view style="white-space: nowrap;">
+  <scroll-view id="moveScroll" scroll-left="{{scollLeft}}" scroll-x="true"  style="height: {{high}}rpx;" class="bottom-border flex_left_center">
+    <block wx:for="{{items}}" wx:key="ss">
+      <view id="cell{{index}}" catchtap="tap_topIndex"  data-index="{{index}}" style="background-color: {{bgColor}};height: calc(100% - 8rpx);display: inline-block;{{cellWidth > 0 ? 'width:' + cellWidth +'rpx' : ''}};">
+        <view class="w100 h100 flex_center">
+          <text style="font-size:{{topIndex == index ? textSelSize : textSize}}rpx ; color: {{topIndex == index ? textSelColor : textColor}};padding: 0rpx 20rpx;">{{item}}</text>
+        </view>
+        <view class="w100 flex_center" style="height: 4rpx;">
+          <view style="background-color:{{topIndex == index ? lineColor : 'transparent'}};width: 40rpx;height: 4rpx;"></view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+

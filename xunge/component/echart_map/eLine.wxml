@@ -1,0 +1,5 @@
+<!--component/echart_map/eLine.wxml-->
+
+<ec-canvas id="line" canvas-id="line" ec="{{ec}}"></ec-canvas>
+
+
