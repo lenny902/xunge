@@ -1,0 +1,14 @@
+<!--pages/tabbar/mine/question/question.wxml-->
+<cus_page
+  title="常见问题"
+  bg_color="var(--themeColor)"
+>
+  <block wx:for="{{list}}">
+    <view catchtap="go_to_next" data-item="{{item}}" slot="item" class="padding-center bottom-border flex_center_between" style="background-color: white;height: 100rpx;">
+      <view class="flex_left_center" style="margin-bottom: 10rpx;">
+        <text>{{item.question}}</text>
+      </view>
+      <iconfont size="18" name="youjiantou" color="#999"></iconfont>
+    </view>
+  </block>
+</cus_page>

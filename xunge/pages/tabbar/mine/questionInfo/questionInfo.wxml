@@ -1,0 +1,15 @@
+<!--pages/tabbar/mine/questionInfo/questionInfo.wxml-->
+<cus_page
+  title="详情"
+  bg_color="var(--themeColor)"
+>
+  <view slot="item" class="padding-center bottom-border" style="height: 80rpx;">
+    <text style="color: #333;font-size: 30rpx;">{{info.question}}</text>
+  </view>
+  <view slot="item" class="padding-center" style="margin-top: 20rpx;margin-bottom: 20rpx;">
+    <text style="color: #666;font-size: 28rpx;">解答：</text>
+    <view>
+      <text style="font-size: 30rpx;color: #333;">{{info.replyContent}}</text>
+    </view>
+  </view>
+</cus_page>

@@ -23,10 +23,10 @@
 
   <block wx:for="{{zuArr}}" wx:key="ss" wx:for-item="sectionItem" wx:for-index="section">
     <block wx:for="{{zuArr[section]}}" wx:key="ss1">
-      <view slot="item" class="flex_center_between padding-center bottom-border" style="height: 110rpx;background-color: white;">
+      <view catchtap="go_to_next" data-page="{{item.page}}" slot="item" class="flex_center_between padding-center bottom-border" style="height: 110rpx;background-color: white;">
         <view class="flex_left_center">
-          <iconfont name="{{item.icon}}" color="#666"></iconfont>
-          <text style="margin-left: 10rpx;color: #666;">{{item.name}}</text>
+          <iconfont size="15" name="{{item.icon}}" color="#666"></iconfont>
+          <text style="margin-left: 10rpx;color: #666;font-size: 30rpx;">{{item.name}}</text>
         </view>
         <view>
           <iconfont name="youjiantou" color="#999"></iconfont>

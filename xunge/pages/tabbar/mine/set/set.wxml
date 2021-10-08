@@ -1,0 +1,39 @@
+<!--pages/tabbar/mine/set/set.wxml-->
+<cus_page
+  title="我的设置"
+  bg_color="var(--themeColor)"
+>
+  <block wx:for="{{zuArr}}" wx:key="ss" wx:for-item="sectionItem" wx:for-index="section">
+    <view slot="item" class="padding-center flex_left_center" style="background-color: white;height: 80rpx;">
+      <text style="color:#999;font-size: 30rpx;">{{sectionItem.name}}</text>
+    </view>
+    <block wx:for="{{zuArr[section].list}}" wx:key="ss1">
+      <view catchtap="tap_show" data-section="{{section}}" data-row="{{index}}" slot="item" class="flex_center_between padding-center bottom-border" style="height: 110rpx;background-color: white;">
+        <view class="flex_left_center">
+          <text style="color: #666;font-size: 30rpx;">{{item.name}}</text>
+        </view>
+        <view wx:if="{{section == 0}}" class="flex_right_center">
+          <text style="font-size: 30rpx;color: #999;">{{item.value}}</text>
+          <iconfont name="youjiantou" color="#999"></iconfont>
+        </view>
+        <view wx:else>
+          <switch bindchange="bindchange" data-row="{{index}}" checked="{{item.value != 0}}" color="var(--themeColor)"></switch>
+        </view>
+      </view>
+    </block>
+    <view slot="item" style="height: 20rpx;"></view>
+  </block>
+</cus_page>
+
+<cus_alert
+  wx:if="{{isShow}}"
+  isCancel="{{true}}"
+  bind:sure="tap_sure"
+  bind:cancel="tap_cancel"
+  height="320rpx"
+  title="{{showInfo.name}}"
+ >
+  <view slot="item" style="height:80rpx;border:1px solid #e5e5e5;border-radius:10rpx;" class="flex_left_center">
+    <input bindinput="inputChange" type="text" placeholder="请输入{{showInfo.name}}" style="margin-left:20rpx;width: 100%;margin-right: 20rpx;" value="{{inputName}}"></input>
+  </view>
+ </cus_alert>

@@ -1,0 +1,20 @@
+<!--pages/tabbar/mine/myQustion/myQustion.wxml-->
+<cus_page
+  title="我的提问"
+  bg_color="var(--themeColor)"
+  bottom_view_height="{{100}}"
+>
+  <block wx:for="{{list}}">
+    <view catchtap="go_to_next" data-item="{{item}}"  slot="item" class="padding-center bottom-border flex_center_between" style="background-color: white;height: 100rpx;">
+      <view class="flex_left_center" style="margin-bottom: 10rpx;">
+        <text>{{item.fkContent}}</text>
+      </view>
+      <iconfont size="18" name="youjiantou" color="#999"></iconfont>
+    </view>
+  </block>
+  <view slot="bottom" class="flex_center_center">
+    <view catchtap="go_to_tiQ" style="width: 80rpx;height: 80rpx;background-color: var(--themeColor);border-radius: 50%;" class="flex_center_center">
+      <iconfont size="15" name="tiwen" color="white"></iconfont>
+    </view>
+  </view>
+</cus_page>

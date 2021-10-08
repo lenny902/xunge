@@ -6,7 +6,7 @@
 <block wx:if="{{isOperateAlert}}">
   <!-- 有浅黑背景部分 -->
   <view wx:if="{{isMark}}" catchtap="{{isHideAlertByBg?'tap_to_cancel':''}}"  class="clistMark {{alertPosIndex == 0?'flex_center_center':(alertPosIndex == 1?'flex_center_bottom':'flex_center_top')}} ">
-    <view catchtap="tap_to" style="width:{{width}};height:{{height}};border-radius:10rpx;padding:0rpx 30rpx;">
+    <view catchtap="tap_to" style="background-color: white;width:{{width}};height:{{height}};border-radius:10rpx;padding:0rpx 30rpx;">
       <view wx:if="{{isHeader}}" style="width:100%;height:{{headerHeight}}rpx;" class="flex_center_center">
         <text wx:if="{{!isHeaderSetting}}" style="font-weight:bold">{{title}}</text>
         <slot name="header"></slot>

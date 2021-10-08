@@ -176,9 +176,42 @@ var http_stock_getStockOfFund= (param) => {
   http_POST('stock/getStockOfFund',param)
 }
 
+var http_msg_getMsgList= (param) => {
+  http_POST('msg/getMsgList',param)
+}
+
+var http_document_getDocumentHistoryList= (param) => {
+  http_POST('document/getDocumentHistoryList',param)
+}
+
+var http_feedback_list= (param) => {
+  http_POST('feedback/getFeedbackList',param)
+}
+
+var http_feedback_addFeedback= (param) => {
+  http_POST('feedback/addFeedback',param)
+}
+
+var http_user_getQuestion= (param) => {
+  http_POST('user/getQuestion',param)
+}
+
+var http_user_improveAccount= (param) => {
+  http_POST('user/improveAccount',param)
+}
+
+
+
+
 
 
 module.exports = {
+  http_user_improveAccount:http_user_improveAccount,
+  http_user_getQuestion:http_user_getQuestion,
+  http_feedback_list:http_feedback_list,
+  http_feedback_addFeedback:http_feedback_addFeedback,
+  http_document_getDocumentHistoryList:http_document_getDocumentHistoryList,
+  http_msg_getMsgList:http_msg_getMsgList,
   http_login:http_login,
   http_act:http_act,
   http_act_info:http_act_info,

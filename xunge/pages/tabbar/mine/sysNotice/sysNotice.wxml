@@ -1,0 +1,20 @@
+<!--pages/tabbar/mine/sysNotice/sysNotice.wxml-->
+<cus_page
+  title="系统通知"
+  bg_color="var(--themeColor)"
+>
+  <block wx:for="{{list}}">
+    <view slot="item" class="margin-center-padding-border" style="background-color: white;margin-bottom: 20rpx;padding-top: 10rpx;padding-bottom: 10rpx;">
+      <view class="flex_left_center" style="margin-bottom: 10rpx;">
+        <text>{{item.title}}</text>
+      </view>
+      <view class="flex_left_center" style="margin-bottom: 10rpx;">
+        <text style="font-size: 28rpx;color: #666;">{{item.content}}</text>
+      </view>
+      <view class="flex_center_between">
+        <text style="font-size: 26rpx;color: #999;">{{item.dateStr}}</text>
+        <text style="font-size: 26rpx;color: var(--themeColor);">查看详情</text>
+      </view>
+    </view>
+  </block>
+</cus_page>

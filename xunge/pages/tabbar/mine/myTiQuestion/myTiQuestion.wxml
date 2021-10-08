@@ -1,0 +1,16 @@
+<!--pages/tabbar/mine/myTiQuestion/myTiQuestion.wxml-->
+<cus_page
+  title="提问"
+  bg_color="var(--themeColor)"
+  bottom_view_height="{{120}}"
+>
+  <view slot="item" class="margin-center-padding-border" style="border:1px #999 solid;padding-top: 20rpx;padding-bottom: 20rpx;">
+    <textarea bindinput="bindinput" style="height: 300rpx;font-size: 30rpx;" placeholder="请输入您想咨询的问题"></textarea>
+  </view>
+  <view slot="item" class="flex_center_center" style="height: 60rpx;">
+    <text style="font-size: 26rpx;color: #999;">我们收到您的问题将在最快时间内回复您。</text>
+  </view>
+  <view catchtap="addQues" slot="bottom" style="background-color: var(--themeColor);height: 100rpx;" class="margin-center-padding-border flex_center_center">
+    <text style="color: white;">提交</text>
+  </view>
+</cus_page>

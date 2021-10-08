@@ -8,7 +8,14 @@
     "pages/tabbar/home/docInfo/docInfo",
     "pages/tabbar/fund/fundInfo",
     "pages/tabbar/stock/stockInfo",
-    "pages/tabbar/stock/stockBig"
+    "pages/tabbar/stock/stockBig",
+    "pages/tabbar/mine/sysNotice/sysNotice",
+    "pages/tabbar/mine/histroy/histroy",
+    "pages/tabbar/mine/myQustion/myQustion",
+    "pages/tabbar/mine/myTiQuestion/myTiQuestion",
+    "pages/tabbar/mine/question/question",
+    "pages/tabbar/mine/questionInfo/questionInfo",
+    "pages/tabbar/mine/set/set"
   ],
   "window": {
     "navigationStyle": "custom"
