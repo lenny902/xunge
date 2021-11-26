@@ -106,14 +106,28 @@ Page({
       page:"./set/set"
     })
 
+    arr2.push({
+      name:"退出登录",
+      icon:"shezhi",
+      page:"logout"
+    })
+
     this.setData({
       zuArr:[arr,arr1,arr2]
     })
   },
   go_to_next(e){
     let url = e.currentTarget.dataset.page
-    wx.navigateTo({
-      url: url,
-    })
+    if (url == "logout") {
+      wx.ls.saveToken('')
+      wx.redirectTo({
+        url: '/pages/login/login',
+      })
+    }else {
+      wx.navigateTo({
+        url: url,
+      })
+    }
+    
   }
 })

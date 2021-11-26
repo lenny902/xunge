@@ -73,14 +73,17 @@ Page({
           success:res1=>{
             if (res1.errMsg == "login:ok") {
               let code = res1.code
+              console.log(code)
               wx.ls.saveToken(code)
               let param = {}
               // param["code"] = code
               param["wxName"] = userInfo.nickName
               param["wxHeadPic"] = userInfo.avatarUrl
+              // return
               wx.http.http_login({
                 data:param,
                 success:res=>{
+                  
                   wx.switchTab({
                     url: '/pages/tabbar/home/home',
                   })

@@ -2,7 +2,7 @@
   "pageOrientation": "landscape",
   "usingComponents": {
     "mp-icon": "weui-miniprogram/icon/icon",
-    "kLine":"/component/echart_map/kLine",
-    "top_bar": "/component/top_bar/top_bar"
+    "kLine":"/components/echart_map/kLine",
+    "top_bar": "/components/top_bar/top_bar"
   }
 }

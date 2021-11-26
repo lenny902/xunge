@@ -7,6 +7,10 @@
   is_show_back="{{false}}"
   first_space_height="{{0}}"
   second_header_height="{{100}}"
+  isOpenRefresh="{{true}}"
+  bind:refresh="refresh"
+  bind:scrollToLower="bindscrollToLower"
+  isMore="{{true}}"
 >
 
   <view slot="ss" style="background-color: rgb(0, 0, 0,0.3);margin-left:20rpx;height: 60rpx;width: calc(100vw - 380rpx);border-radius: 40rpx;" class="flex_left_center">

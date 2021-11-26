@@ -1,5 +1,9 @@
 
 var num2 = function(str){
+  console.log(str)
+  if (str == null){
+    return 0
+  }
   return Number(str).toFixed(2)
 }
 

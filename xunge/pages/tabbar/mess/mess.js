@@ -12,7 +12,11 @@ Page({
     pageNo:1,
     pageSize:12,
     list:[],
-    wxId:"x"
+    wxId:"x",
+    //
+    showSubs:[false,false,false,false,false],
+    subIndex:-1,
+    isShowSub:false
   },
 
   /**
@@ -116,8 +120,18 @@ Page({
         pageSize:this.data.pageSize
       },
       success:res=>{
+
+        let list = res.data.list
+
+        let newList = []
+        if (that.data.pageNo == 1) {
+          newList = list
+        }else {
+          newList = that.data.list.concat(list)
+        }
+
         that.setData({
-          list:res.data.list
+          list:newList
         })
       }
     })
@@ -128,7 +142,7 @@ Page({
     let item = this.data.list[index]
     wx.http.http_fund_addSubscribe({
       data:{
-        fundCode:item.targetCode,
+        fundCode:item.fundCode,
         wxId:this.data.wxId
       },
       success:res=>{
@@ -137,7 +151,7 @@ Page({
           icon:'none'
         })
 
-        item.wxId = that.data.wxId
+        item.subscribed = true
         that.data.list[index] = item
         that.setData({
           list:that.data.list
@@ -151,7 +165,7 @@ Page({
     let item = this.data.list[index]
     wx.http.http_fund_delSubscribe({
       data:{
-        fundCode:item.targetCode,
+        fundCode:item.fundCode,
         wxId:this.data.wxId
       },
       success:res=>{
@@ -160,7 +174,7 @@ Page({
           icon:'none'
         })
 
-        item.wxId = ""
+        item.subscribed = false
         that.data.list[index] = item
         that.setData({
           list:that.data.list
@@ -171,7 +185,119 @@ Page({
   go_to_fundInfo(e){
     let item = e.currentTarget.dataset.item
     wx.navigateTo({
-      url: '/pages/tabbar/fund/fundInfo?fundCode='+item.targetCode,
+      url: '/pages/tabbar/fund/fundInfo?fundCode='+item.fundCode,
     })
+  },
+
+  tap_sub_index(e){
+    let dataset = e.currentTarget.dataset
+    let section = dataset.section
+    let index = dataset.index
+    
+    let array = this.data.showSubs;
+
+    if (this.data.subIndex > -1 && this.data.subIndex != section ) {
+      
+      for (let i = 0; i < array.length; i++) {
+        array[i] = false
+      }
+      this.setData({
+        subIndex:-1,
+        showSubs:array
+      })
+      return
+    }
+
+    
+    array[index] = !array[index]
+    let isshow = false
+    for (let i = 0; i < array.length; i++) {
+      if (i!=index) {
+        array[i] = false
+      }
+      if (array[i]) {
+        isshow = true
+      }
+    }
+    this.setData({
+      showSubs:array,
+      subIndex:section,
+      isShowSub:isshow
+    })
+
+  },
+
+  tap_sub_index(e){
+    let index = e.currentTarget.dataset.index;
+    let section = e.currentTarget.dataset.section;
+    let array = this.data.showSubs;
+
+    if (this.data.subIndex > -1 && this.data.subIndex != section ) {
+      
+      for (let i = 0; i < array.length; i++) {
+        array[i] = false
+      }
+      this.setData({
+        subIndex:-1,
+        showSubs:array
+      })
+      return
+    }
+
+    
+    array[index] = !array[index]
+    let isshow = false
+    for (let i = 0; i < array.length; i++) {
+      if (i!=index) {
+        array[i] = false
+      }
+      if (array[i]) {
+        isshow = true
+      }
+    }
+    this.setData({
+      showSubs:array,
+      subIndex:section,
+      isShowSub:isshow
+    })
+
+    let item = this.data.list[section];
+    this.getFoundDetail(item.fundCode,Number(index) + 1)
+  },
+
+  getFoundDetail(fundCode,type){
+    //1建，2增，3减，4清，5前10
+    let that = this
+    wx.http.http_fund_getFundDynamicDetails({
+      data:{
+        "dynamicType":type,
+        "fundCode":fundCode
+      },
+      success:res=>{
+        let list = res.data 
+        list.forEach(element => {
+          element.showTime = wx.u.doneTime(element.fetchTime)
+        });
+        that.setData({
+          subList:list
+        })
+      }
+    })
+  },
+  go_to_stock(e){
+    let item = e.currentTarget.dataset.item
+    wx.navigateTo({
+      url: '/pages/tabbar/stock/stockInfo?stockCode='+item.stockCode +"&info="+JSON.stringify(item),
+    })
+  },
+  refresh(){
+    this.data.pageNo = 1
+    this.getFundList()
+    this.selectComponent("#mess").EndRefresh()
+  },
+  bindscrollToLower(){
+    this.data.pageNo += 1
+    this.getFundList()
+    this.selectComponent("#mess").EndScrolltolower()
   }
 })

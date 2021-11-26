@@ -108,8 +108,16 @@ Page({
         list.forEach(element => {
           element.showTime = wx.u.doneTime(element.createDt)
         });
+
+        let newList = []
+        if (that.data.pageNo == 1) {
+          newList = list
+        }else {
+          newList = that.data.list.concat(list)
+        }
+
         that.setData({
-          list:list
+          list:newList
         })
       }
     })
@@ -127,8 +135,16 @@ Page({
         list.forEach(element => {
           element.showTime = wx.u.doneTime(element.createDt)
         });
+        
+        let newList = []
+        if (that.data.pageNo == 1) {
+          newList = list
+        }else {
+          newList = that.data.list.concat(list)
+        }
+
         that.setData({
-          list:list
+          list:newList
         })
       }
     })
@@ -145,8 +161,15 @@ Page({
         list.forEach(element => {
           element.showTime = wx.u.doneTime(element.nowTime)
         });
+        let newList = []
+        if (that.data.pageNo == 1) {
+          newList = list
+        }else {
+          newList = that.data.list.concat(list)
+        }
+
         that.setData({
-          list:list
+          list:newList
         })
       }
     })
@@ -231,5 +254,15 @@ Page({
     wx.navigateTo({
       url: '/pages/tabbar/stock/stockInfo?stockCode='+item.stockCode +"&info="+JSON.stringify(item),
     })
+  },
+  refresh(){
+    this.data.pageNo = 1
+    this.getList()
+    this.selectComponent("#home").EndRefresh()
+  },
+  bindscrollToLower(){
+    this.data.pageNo += 1
+    this.getList()
+    this.selectComponent("#home").EndScrolltolower()
   }
 })

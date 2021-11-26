@@ -1,7 +1,7 @@
 {
   "usingComponents": {
     "cus_page":"clmini_common/components/cus_page/index",
-    "top_bar": "/component/top_bar/top_bar",
-    "kLine":"/component/echart_map/kLine"
+    "top_bar": "/components/top_bar/top_bar",
+    "kLine":"/components/echart_map/kLine"
   }
 }
