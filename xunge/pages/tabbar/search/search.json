@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon",
+    "iconfont": "/iconfont/iconfont",
+    "cus_page":"clmini_common/components/cus_page/index"
+  }
+}

@@ -16,11 +16,19 @@ var http_POST = (url,param) => {
     success:res=>{
       let obj = res.data 
       let code = obj.code
-      console.log(JSON.stringify(obj))
+      console.log(allUrl,JSON.stringify(obj))
       if (code == 200) {
         if (param.success) {
           param.success(obj)
         }
+      }else if (code == 403){
+        wx.showToast({
+          title: '登录失败，请重新登录',
+          icon:'none'
+        })
+        wx.redirectTo({
+          url: '/pages/login/login',
+        })
       }else {
         if (param.fail){
           param.fail(obj)
@@ -43,7 +51,33 @@ var http_GET = (url,param) => {
     method: 'GET',
     data:data,
     header:{
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'X-Auth-Token': wx.ls.getToken()
+    },
+    success:res=>{
+      if (param.success) {
+        console.log(res)
+        param.success(res)
+      }
+    },
+    fail:res=>{
+      if (param.fail){
+        param.fail(res)
+      }
+    }
+  })
+}
+
+var http_DELETE = (url,param) => {
+  let allUrl = host + url
+  let data = param.data != null ? param.data : {}
+  wx.request({
+    url: allUrl,
+    method: 'DELETE',
+    data:data,
+    header:{
+      'content-type': 'application/json',
+      'X-Auth-Token': wx.ls.getToken()
     },
     success:res=>{
       if (param.success) {
@@ -173,7 +207,7 @@ var http_stock_getStockByFundType= (param) => {
 }
 
 var http_stock_getStockOfFund= (param) => {
-  http_POST('stock/getStockOfFund',param)
+  http_POST('stock/getStockOfFund?stockCode='+param.data['stockCode'],param)
 }
 
 var http_msg_getMsgList= (param) => {
@@ -200,8 +234,17 @@ var http_user_improveAccount= (param) => {
   http_POST('user/improveAccount',param)
 }
 
+var http_document_collection_add = (param) => {
+  http_POST('document/'+param.data.id+'/collection',param)
+}
 
+var http_document_collection_del = (param) => {
+  http_DELETE('document/'+param.data.id+'/collection',param)
+}
 
+var http_search= (param) => {
+  http_GET('home/search',param)
+}
 
 
 
@@ -240,5 +283,8 @@ module.exports = {
   http_stock_getStock:http_stock_getStock,
   http_stock_getStockChangeOfFund:http_stock_getStockChangeOfFund,
   http_stock_getStockByFundType:http_stock_getStockByFundType,
-  http_stock_getStockOfFund:http_stock_getStockOfFund
+  http_stock_getStockOfFund:http_stock_getStockOfFund,
+  http_document_collection_add:http_document_collection_add,
+  http_document_collection_del:http_document_collection_del,
+  http_search:http_search
 }

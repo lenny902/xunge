@@ -1,3 +1,5 @@
+
+<wxs module="tool" src="/utils/tool.wxs"></wxs>
 <cus_page
   bg_color="var(--themeColor)"
   first_space_height="{{0}}"
@@ -55,16 +57,16 @@
   <block wx:for="{{list}}" wx:id="ss" wx:for-index="row">
     <view catchtap="tap_item" data-row="{{row}}" style="background-color: white;height: 100rpx;" slot="item" class="flex_center_between padding-center">
       <view style="width: 25%;" class="flex_center_center">
-        <text style="color: #333;font-size: 25rpx;">{{item.fundType}}</text>
+        <text style="color: #333;font-size: 25rpx;">{{item.name}}</text>
       </view>
       <view style="width: 25%;" class="flex_center_center">
-        <text style="color: #333;font-size: 25rpx;">{{item.fundNum}}</text>
+        <text style="color: #333;font-size: 25rpx;">{{tool.num2(item.count)}}</text>
       </view>
       <view style="width: 25%;" class="flex_center_center">
-        <text style="color: #333;font-size: 25rpx;">{{item.shareTotal}}</text>
+        <text style="color: #333;font-size: 25rpx;">{{tool.num2(item.total)}}</text>
       </view>
       <view style="width: 25%;" class="flex_center_center">
-        <text style="color: #333;font-size: 25rpx;">{{item.marketValue}}</text>
+        <text style="color: #333;font-size: 25rpx;">{{tool.num2(item.value)}}</text>
       </view>
     </view>
     <block wx:if="{{showSubList && currIndex == row}}" >
@@ -95,7 +97,7 @@
             <text style="color: #333;font-size: 25rpx;">{{subItem.shareNum}}</text>
           </view>
           <view style="width: 25%;" class="flex_center_center">
-            <text style="color: {{subItem.rate > 0 ? 'red' : 'green'}};font-size: 25rpx;">{{subItem.rate}}</text>
+            <text style="color: {{subItem.changePercent > 0 ? 'red' : 'green'}};font-size: 25rpx;">{{subItem.changePercent}}</text>
           </view>
         </view>
       </block>

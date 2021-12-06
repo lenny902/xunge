@@ -13,7 +13,7 @@
   isMore="{{true}}"
 >
 
-  <view slot="ss" style="background-color: rgb(0, 0, 0,0.3);margin-left:20rpx;height: 60rpx;width: calc(100vw - 380rpx);border-radius: 40rpx;" class="flex_left_center">
+  <view slot="ss" catchtap="go_to_search" style="background-color: rgb(0, 0, 0,0.3);margin-left:20rpx;height: 60rpx;width: calc(100vw - 380rpx);border-radius: 40rpx;" class="flex_left_center">
     <mp-icon style="margin-left: 10rpx;" icon="search" size="20" color="white"></mp-icon>
     <text style="font-size: 18rpx;color: white;">搜索感兴趣的股票、基金、私募等</text>
   </view>
@@ -53,7 +53,7 @@
         </view>
         <view class="flex_column" style="justify-content: space-between;width: calc(100% - 150rpx);">
           <view class="flex_center_between" >
-            <text class="oneText">{{item.fundName}}</text>
+            <text class="oneText" style="margin-right: 20rpx;">{{item.fundName}}</text>
             <iconfont catchtap="unlike" data-index="{{index}}" wx:if="{{item.subscribed}}" name="zixuanxuanzhong" color="red" size="25"></iconfont>
             <iconfont catchtap="like" data-index="{{index}}" wx:else name="zixuanmoren" color="#999" size="25"></iconfont>
           </view>

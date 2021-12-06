@@ -105,7 +105,7 @@ Page({
   doneData(list){
     let xs = []
     let ys1 = []
-    let miny = 0
+    let miny = 10000
     let maxy = 0
     let todayInfo = {}
     list.reverse().forEach(element => {
@@ -118,17 +118,31 @@ Page({
       todayInfo = element
     });
 
+    let minSize = this.sizeOfInt(miny)
+    let pw = Math.pow(10,minSize-2) 
+    maxy += pw
+    miny -= pw
     let kline = this.selectComponent("#kline")
     if (kline) {
       kline.refresh({
         xs:xs,
         ys1:ys1,
-        maxy:maxy,
-        miny:miny
+        maxy:maxy.toFixed(2),
+        miny:miny.toFixed(2)
       })
     }
     this.setData({
       todayInfo:todayInfo
     })
   },
+
+  //数字为几位数
+  sizeOfInt(i){
+    let l = 0
+    while(i >= 1) {
+      i = i / 10
+      l += 1
+    }
+    return l
+  }
 })

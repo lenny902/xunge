@@ -1,6 +1,5 @@
 
-var num2 = function(str){
-  console.log(str)
+var num2 = function(str){ 
   if (str == null){
     return 0
   }

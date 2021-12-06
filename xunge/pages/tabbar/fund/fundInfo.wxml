@@ -118,7 +118,10 @@
         </view>
       </view>
       <view>
-        <text class="twoText" style="color: #666;font-size: 24rpx;">{{managerInfo.content}}</text>
+        <text class="{{isRenOpen ? '' : 'twoText'}}" style="color: #666;font-size: 24rpx;">{{managerInfo.content}}</text>
+      </view>
+      <view class="flex_right_center" style="margin-top: 10rpx;">
+        <text catchtap="tap_ren_open" style="margin-right: 30rpx;font-size: 26rpx;color: var(--themeColor);text-decoration: underline;">{{isRenOpen ? '收起' : '展开'}}</text>
       </view>
       <view class="flex_center_between" style="height: 100rpx;">
         <view style="width: 20%;">
@@ -242,7 +245,10 @@
       <text style="margin-left: 15rpx;">投资策略</text>
     </view>
     <view class="padding-center">
-      <text style="font-size: 25rpx;">{{baseInfo.strategy}}</text>
+      <text class="{{isOpen ? '' : 'twoText'}}" style="font-size: 25rpx;">{{baseInfo.strategy}}</text>
+    </view>
+    <view class="flex_right_center" style="margin-top: 10rpx;">
+      <text catchtap="tap_open" style="margin-right: 30rpx;font-size: 26rpx;color: var(--themeColor);text-decoration: underline;">{{isOpen ? '收起' : '展开'}}</text>
     </view>
   </view>
 

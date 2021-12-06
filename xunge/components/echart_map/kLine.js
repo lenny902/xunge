@@ -30,7 +30,7 @@ Component({
         {
           type: 'value',
           min:0,
-          max:100,
+          // max:100,
           axisLine: {
             lineStyle: {
               color: '#999'
@@ -44,6 +44,7 @@ Component({
           axisTick: { show: true },
           data: [],
           axisLine: {
+            show:true,
             lineStyle: {
               color: '#999'
             }
@@ -56,7 +57,7 @@ Component({
       dataZoom: {
         show: false,
         type:"inside",
-        start: 98,
+        start: 50,
         end: 100,
       },
       series: [
@@ -151,7 +152,7 @@ Component({
         for (var j = 0; j < dayCount; j++) {
           sum += +arr[i - j][1];
         }
-        result.push(sum / dayCount);
+        result.push((sum / dayCount).toFixed(2));
       }
       return result;
     },
@@ -160,7 +161,7 @@ Component({
       option.xAxis[0].data = dic.xs
       option.series[0].data = dic.ys1
       option.yAxis[0].min = dic.miny
-      option.yAxis[0].max = dic.maxy
+      // option.yAxis[0].max = dic.maxy
 
       let arr = dic.ys1
       let ma5 = this.calculateMA(arr,5)

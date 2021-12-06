@@ -1,0 +1,65 @@
+<!--pages/tabbar/search/search.wxml-->
+<cus_page
+  title="搜索"
+  bg_color="var(--themeColor)"
+  first_space_height="{{0}}"
+  second_header_height="{{120}}"
+>
+  <view slot="header" style="background-color: var(--themeColor);height: 120rpx;" class="flex_center_between padding-center">
+    <view style="background-color: rgba(68, 49, 49, 0.3);height: 70rpx;width: 100%;margin-right: 20rpx;border-radius: 40rpx;padding-left: 20rpx;padding-right: 20rpx;" class="flex_center_between">
+      <view class="flex_left_center" style="width: 100%;">
+        <mp-icon style="display: flex;flex-direction: column;align-items: center;justify-content: center;" icon="search" size="20" color="white"></mp-icon>
+        <input bindinput="bindinput" value="{{inputStr}}" style="width: 100%;color: white;font-size: 28rpx;" placeholder="搜索感兴趣的股票、基金、私募等" placeholder-style="color:rgba(255,255,255,0.3);font-size:26rpx"></input>
+      </view>
+      <view catchtap="clear" wx:if="{{inputStr.length > 0}}" style="width: 30rpx;height: 30rpx;background-color: rgba(255, 255, 255, 0.5);border-radius: 50%;" class="flex_center_center">
+        <mp-icon style="display: flex;flex-direction: column;align-items: center;justify-content: center;" size="10" icon="close" color="gray"></mp-icon>
+      </view>
+    </view>
+    <view style="background-color: white;border-radius: 70rpx;width: 150rpx;height: 70rpx;" class="flex_center_center">
+      <text style="color: var(--themeColor);font-size: 26rpx;">搜索</text>
+    </view>
+  </view>
+  <view wx:if="{{noData}}" class="flex_center_center" style="height: 500rpx;">
+    <text style="color: gray;">没有搜索到相应数据</text>
+  </view>
+  <view wx:if="{{stocks.length > 0}}" slot="item">
+    <view class="flex_left_center" style="margin-left: 20rpx;height: 100rpx;">
+      <text>股票</text>
+    </view>
+    <block wx:for="{{stocks}}">
+      <view style="padding-right: 40rpx;padding-left: 40rpx;">
+        <view catchtap="go_to_stock" data-item="{{item}}" class="bottom-border flex_center_between" style="height: 100rpx;">
+          <text class="oneText" style="margin-right: 20rpx;font-size: 26rpx;">{{item.name}}</text>
+          <iconfont catchtap="unlike" data-index="{{index}}" data-item="{{item}}" data-type="{{0}}" wx:if="{{item.subscribed}}" name="zixuanxuanzhong" color="red" size="25"></iconfont>
+          <iconfont catchtap="like" data-index="{{index}}" data-type="{{0}}" data-item="{{item}}" wx:else name="zixuanmoren" color="#999" size="25"></iconfont>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view wx:if="{{funds.length > 0}}" slot="item">
+    <view class="flex_left_center" style="margin-left: 20rpx;height: 100rpx;">
+      <text>基金</text>
+    </view>
+    <block wx:for="{{funds}}">
+      <view style="padding-right: 40rpx;padding-left: 40rpx;">
+        <view catchtap="go_to_fund" data-item="{{item}}" class="bottom-border flex_center_between" style="height: 100rpx;">
+          <text class="oneText" style="margin-right: 20rpx;font-size: 26rpx;">{{item.name}}</text>
+          <iconfont catchtap="unlike" data-index="{{index}}" data-item="{{item}}" data-type="{{1}}" wx:if="{{item.subscribed}}" name="zixuanxuanzhong" color="red" size="25"></iconfont>
+          <iconfont catchtap="like" data-index="{{index}}" data-type="{{1}}" data-item="{{item}}" wx:else name="zixuanmoren" color="#999" size="25"></iconfont>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view wx:if="{{others.length > 0}}" slot="item">
+    <view class="flex_left_center" style="margin-left: 20rpx;height: 100rpx;">
+      <text>其他</text>
+    </view>
+    <block wx:for="{{others}}">
+      <view style="padding-right: 40rpx;padding-left: 40rpx;">
+        <view catchtap="go_to_doc" data-item="{{item}}" class="bottom-border flex_center_between" style="height: 100rpx;">
+          <text class="oneText" style="font-size: 26rpx;">{{item.name}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</cus_page>

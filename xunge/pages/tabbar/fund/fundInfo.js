@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isOpen:false,
+    isRenOpen:false,
     zuAllArr:[],
     fenList:[
       {
@@ -223,9 +225,12 @@ Page({
         fundCode:fundCode
       },
       success:res=>{
-        that.setData({
-          managerInfo:res.data
-        })
+        let arr = res.data
+        if (arr.length > 0) {
+          that.setData({
+            managerInfo:arr[0]
+          })
+        }
       }
     })
 
@@ -340,6 +345,18 @@ Page({
       ys1:bFArr,
       ys2:ageArr,
       ys3:huArr
+    })
+  },
+
+  tap_open(){
+    this.setData({
+      isOpen:!this.data.isOpen
+    })
+  },
+
+  tap_ren_open(){
+    this.setData({
+      isRenOpen:!this.data.isRenOpen
     })
   }
 })

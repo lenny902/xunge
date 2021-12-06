@@ -39,9 +39,27 @@ var isCurrMonth = (date,month) => {
   return (Date.parse(now) - time) < space
 }
 
+var num2 = function(str){ 
+  if (str == null){
+    return 0
+  }
+  return Number(str).toFixed(2)
+}
+
+//数组中包含某个元素
+var arrHas = function(arr,item) {
+  if (arr) {
+    return arr.indexOf(item) 
+  }
+  return -1
+}
+
+
 module.exports = {
   formatTime,
   doneTime:doneTime,
   setTheArr:setTheArr,
-  isCurrMonth:isCurrMonth
+  isCurrMonth:isCurrMonth,
+  num2:num2,
+  arrHas:arrHas
 }

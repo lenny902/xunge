@@ -20,10 +20,10 @@ Page({
    */
   onLoad: function (options) {
     let stockCode = options.stockCode
-    let stockInfo = JSON.parse(options.info)
+    // let stockInfo = JSON.parse(options.info)
     this.setData({
       stockCode:stockCode,
-      stockInfo:stockInfo
+      // stockInfo:stockInfo
     })
   },
 
@@ -92,42 +92,60 @@ Page({
         that.doneData(res.data)
       }
     })
-    wx.http.http_stock_getStockByFundType({
-      data:{
-        stockCode:this.data.stockCode,
-        pageNo:1,
-        key:this.data.key
-      },
-      success:res=>{
-        that.setData({
-          list:res.data
-        })
-      }
-    })
+  
+    this.getSubList('')
+    // wx.http.http_stock_getStockByFundType({
+    //   data:{
+    //     stockCode:this.data.stockCode,
+    //     pageNo:1,
+    //     key:this.data.key
+    //   },
+    //   success:res=>{
+        // that.setData({
+        //   list:res.data
+        // })
+    //   }
+    // })
   },
   doneData(list){
     let xs = []
     let ys1 = []
-    let miny = 0
+    let miny = 100000
     let maxy = 0
     list.reverse().forEach(element => {
       let str = element.date
       let arr = str.split('-')
       xs.push(arr[0]+"/"+arr[1]+"/"+arr[2])
-      ys1.push([element.open,element.close,element.low,element.high])
+      ys1.push([wx.u.num2(element.open),wx.u.num2(element.close),wx.u.num2(element.low),wx.u.num2(element.high)])
       miny = Math.min(miny,element.low)
       maxy = Math.max(maxy,element.high)
     });
+
+
+    let minSize = this.sizeOfInt(miny)
+    let pw = Math.pow(10,minSize-2)
+    maxy += pw
+    miny -= pw    
 
     let kline = this.selectComponent("#kline")
     if (kline) {
       kline.refresh({
         xs:xs,
         ys1:ys1,
-        maxy:maxy,
-        miny:miny
+        maxy:maxy.toFixed(2),
+        miny:miny.toFixed(2)
       })
     }
+  },
+
+  //数字为几位数
+  sizeOfInt(i){
+    let l = 0
+    while(i >= 1) {
+      i = i / 10
+      l += 1
+    }
+    return l
   },
 
   tap_item(e){
@@ -135,46 +153,54 @@ Page({
     let item = this.data.list[row]
     this.setData({
       showSubList:!this.data.showSubList,
-      currIndex:row
+      currIndex:row,
+      subList:item.details
     })
-    if (this.data.showSubList) {
-      this.getSubList(item.fundType)
-    }
+
   },
   getSubList(fundType){
+
+    console.log('lsifsf---23')
     let that = this 
-    this.setData({
-      subList:[]
-    })
     wx.http.http_stock_getStockOfFund({
       data:{
         stockCode:this.data.stockCode,
-        fundType:fundType
+        // fundType:fundType
       },
       success:res=>{
+
+        let info = res.data
+        var arr = []
+        for (const key in info) {
+          if (Object.hasOwnProperty.call(info, key)) {
+            const element = info[key];
+            var dic = element;
+            dic["name"] = key
+            arr.push(dic)
+          }
+        }
         that.setData({
-          subList:res.data
+          list:arr,
         })
       }
     })
   },
   go_to_fund(e){
     let item = e.currentTarget.dataset.item
-    // console.log(item)
-    // wx.navigateTo({
-    //   url: '/pages/tabbar/fund/fundInfo?fundCode='+item.fundCode,
-    // })
-
-    wx.http.http_stock_getStockChangeOfFund({
-      data:{
-        stockCode:this.data.stockCode,
-        fundCode:item.fundCode,
-        key:this.data.key
-      },
-      success:res=>{
-        
-      }
+    wx.navigateTo({
+      url: '/pages/tabbar/fund/fundInfo?fundCode='+item.fundCode,
     })
+
+    // wx.http.http_stock_getStockChangeOfFund({
+    //   data:{
+    //     stockCode:this.data.stockCode,
+    //     fundCode:item.fundCode,
+    //     key:this.data.key
+    //   },
+    //   success:res=>{
+        
+    //   }
+    // })
   },
   tap_big(){
     wx.navigateTo({

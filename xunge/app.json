@@ -15,7 +15,8 @@
     "pages/tabbar/mine/myTiQuestion/myTiQuestion",
     "pages/tabbar/mine/question/question",
     "pages/tabbar/mine/questionInfo/questionInfo",
-    "pages/tabbar/mine/set/set"
+    "pages/tabbar/mine/set/set",
+    "pages/tabbar/search/search"
   ],
   "window": {
     "navigationStyle": "custom"

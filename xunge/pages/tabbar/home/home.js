@@ -21,7 +21,20 @@ Page({
    */
   onLoad: function (options) {
     
+    let allStr = "转移至于钢厂由于前十个月D限产效果显著，后续影响供给端的因素将更多转移至于钢厂AD浮亏情况；本轮需求回暖AC预计持续较短，长期来看钢市仍将延续供需双弱格局浮亏情况"
+
+    let urls = [
+      {
+        'text':'AC',
+        'code':'2323'
+      },
+      {
+        'text':'钢厂',
+        'code':'2323'
+      },
+    ] 
   },
+    
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -264,5 +277,10 @@ Page({
     this.data.pageNo += 1
     this.getList()
     this.selectComponent("#home").EndScrolltolower()
+  },
+  go_to_search(){
+    wx.navigateTo({
+      url: '/pages/tabbar/search/search',
+    })
   }
 })

@@ -299,5 +299,10 @@ Page({
     this.data.pageNo += 1
     this.getFundList()
     this.selectComponent("#mess").EndScrolltolower()
+  },
+  go_to_search(){
+    wx.navigateTo({
+      url: '/pages/tabbar/search/search',
+    })
   }
 })

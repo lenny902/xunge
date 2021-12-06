@@ -1,4 +1,7 @@
 // pages/tabbar/home/docInfo/docInfo.js
+
+var WxParse = require('../../../../components/wxParse/wxParse.js');
+
 Page({
 
   /**
@@ -6,7 +9,8 @@ Page({
    */
   data: {
     id:0,
-    item:{}
+    item:{},
+    subContents:[]
   },
 
   /**
@@ -17,6 +21,7 @@ Page({
       id:options.id
     })
     this.getList()
+    
   },
 
   /**
@@ -66,14 +71,57 @@ Page({
    */
   onShareAppMessage: function () {
     let that = this
+    that.fenxiang()
     return {
       title:"详情",
       path:"/pages/tabbar/home/docInfo/docInfo?id="+this.data.id,
       success:res=>{
-        that.fenxiang()
+        
       }
     }
   },
+  doneData(allStr,urls){
+    let that = this
+    let index = 0
+    let spArr = []
+    while(index < urls.length) {
+      let el = urls[index]
+      let spStr = el.text
+      if (spArr.length == 0) {
+        let arr = that.fenGeStr(allStr,spStr)
+        let newArr = []
+        for (let i = 0; i < arr.length; i++) {
+          const eli = arr[i];
+          if (i != 0) {
+            newArr.push(spStr)
+          }
+          newArr.push(eli)
+        }
+        spArr = newArr
+      }else {
+        let newArr = []
+        spArr.forEach(element => {
+          let arr = that.fenGeStr(element,spStr)
+          for (let i = 0; i < arr.length; i++) {
+            const eli = arr[i];
+            if (i != 0) {
+              newArr.push(spStr)
+            }
+            newArr.push(eli)
+          }
+        });
+        spArr = newArr
+      }
+      index += 1
+    }
+    return spArr
+},
+
+//分隔字符串
+fenGeStr(resStr,spStr) {
+  let arr = resStr.split(spStr)
+  return arr
+},
 
   tap_left(){
     wx.switchTab({
@@ -85,7 +133,7 @@ Page({
     let that = this
     wx.http.http_act_addHistory({
       data:{
-        id:this.data.id
+        docId:this.data.id
       },
       success:res=>{
         
@@ -96,8 +144,36 @@ Page({
         id:this.data.id
       },
       success:res=>{
+        let info = res.data
+        info.showTime = wx.u.doneTime(info.createDt)
+        let urls = info.urls
+        let urlTexts = []
+        urls.forEach(element => {
+          urlTexts.push(element.text)
+        });
+        let arr = that.doneData(info.content,urls)
+        
+        let newArr = []
+        if (arr.length == 0) {
+          newArr.push({name:info.content})
+        }else {
+          for (let i = 0; i < arr.length; i++) {
+            const element = arr[i];
+            let dic = {
+              name:element
+            }
+            let urlIndex = wx.u.arrHas(urlTexts,element)
+            if (urlIndex > -1) {
+              dic['type'] = 1
+              dic['code'] = urls[urlIndex]['code']
+            }
+            newArr.push(dic)
+          }
+        }
+        
         that.setData({
-          item:res.data
+          item:info,
+          subContents:newArr
         })
       }
     })
@@ -119,6 +195,32 @@ Page({
 
   },
   shoucang(){
+    if (!this.data.isCollected) {
+      wx.http.http_document_collection_add({
+        data:{
+          id:this.data.id
+        },
+        success:res=>{
+  
+        }
+      })
+    }else {
+      wx.http.http_document_collection_del({
+        data:{
+          id:this.data.id
+        },
+        success:res=>{
+  
+        }
+      })
+    }
+  },
 
+  go_to_stock(e){
+    let item = e.currentTarget.dataset.item
+    console.log(item)
+    wx.navigateTo({
+      url: '/pages/tabbar/stock/stockInfo?stockCode='+item.code
+    })
   }
 })
